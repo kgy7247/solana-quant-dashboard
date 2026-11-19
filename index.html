@@ -135,7 +135,7 @@
   /* ---------- tables ---------- */
   .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -18px;padding:0 18px}
   table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
-  thead th{text-align:right;padding:8px 10px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+  thead th{text-align:right;padding:8px 10px;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
     color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap}
   thead th:first-child{text-align:left}
   thead th:nth-child(2){text-align:left}
@@ -275,7 +275,7 @@
         <thead>
           <tr>
             <th>토큰</th><th>수량</th><th>현재가</th><th>평가액</th>
-            <th>진입가 (SOL)</th><th>진입 대비</th><th>슬롯</th><th>링크</th>
+            <th>진입가 (SOL)</th><th>진입 대비</th><th>점수</th><th>링크</th>
           </tr>
         </thead>
         <tbody id="posBody"><tr><td colspan="8" class="empty">불러오는 중…</td></tr></tbody>
@@ -354,6 +354,10 @@
     solUsd: null,
     lastLive: null,
     lastStatic: null,
+    lastTokens: null,
+    lastPrices: null,
+    failStreak: 0,
+    backoffUntil: 0,
     mode: "none",
     liveOk: false,
     staticOk: false
@@ -469,7 +473,7 @@
     throw new Error(rpcDiag);
   }
 
-  async function fetchWallet() {
+  async function fetchWallet(needTokens) {
     const errs = [];
     let solLamports = null;
 
@@ -480,24 +484,26 @@
 
     const tokens = [];
     let tokenOk = false;
-    for (const programId of TOKEN_PROGRAMS) {
-      try {
-        const res = await rpc("getTokenAccountsByOwner", [WALLET, { programId }, { encoding: "jsonParsed" }]);
-        tokenOk = true;
-        for (const acc of (res.value || [])) {
-          const info = acc?.account?.data?.parsed?.info;
-          if (!info || !info.tokenAmount) continue;
-          const amount = Number(info.tokenAmount.uiAmount || 0);
-          if (!(amount > 0)) continue;
-          tokens.push({
-            mint: info.mint,
-            amount,
-            decimals: info.tokenAmount.decimals,
-            account: acc.pubkey,
-            program: programId
-          });
-        }
-      } catch (e) { errs.push("tokens(" + e.message + ")"); }
+    if (needTokens) {
+      for (const programId of TOKEN_PROGRAMS) {
+        try {
+          const res = await rpc("getTokenAccountsByOwner", [WALLET, { programId }, { encoding: "jsonParsed" }]);
+          tokenOk = true;
+          for (const acc of (res.value || [])) {
+            const info = acc?.account?.data?.parsed?.info;
+            if (!info || !info.tokenAmount) continue;
+            const amount = Number(info.tokenAmount.uiAmount || 0);
+            if (!(amount > 0)) continue;
+            tokens.push({
+              mint: info.mint,
+              amount,
+              decimals: info.tokenAmount.decimals,
+              account: acc.pubkey,
+              program: programId
+            });
+          }
+        } catch (e) { errs.push("tokens(" + e.message + ")"); }
+      }
     }
 
     if (solLamports === null && !tokenOk) throw new Error(errs.join(" / ") || "RPC 응답 없음");
@@ -931,6 +937,11 @@
 
     const srcPill = $("srcPill");
     if (S.mode === "live") { srcPill.className = "pill up"; srcPill.textContent = "LIVE"; }
+    else if (S.mode === "stale") {
+      const age = S.lastLive ? Math.round((Date.now() - S.lastLive) / 1000) : null;
+      srcPill.className = "pill warn";
+      srcPill.textContent = age == null ? "지연" : "지연 " + age + "s";
+    }
     else if (S.mode === "snapshot") { srcPill.className = "pill warn"; srcPill.textContent = "SNAPSHOT " + snapAge() + "m"; }
     else if (S.mode === "none") { srcPill.className = "pill down"; srcPill.textContent = "NO DATA"; }
 
@@ -1146,21 +1157,33 @@
   /* ===================== 갱신 루프 ===================== */
   async function refreshLive(manual = false) {
     if (busy) return;
+    if (!manual && S.backoffUntil && Date.now() < S.backoffUntil) return;
     busy = true;
     $("refreshBtn").classList.add("spin");
     try {
+      const now = Date.now();
+      const needTokens = !S.tokens.length || !S.lastTokens || (now - S.lastTokens > 90000);
+      const needPrices = !Object.keys(S.prices).length || !S.lastPrices || (now - S.lastPrices > 45000);
+
       let wallet = null;
-      try { wallet = await fetchWallet(); } catch (e) { console.warn("지갑 조회 실패:", e.message); }
+      if (needTokens || !S.backoffUntil || now >= S.backoffUntil) {
+        try { wallet = await fetchWallet(needTokens); } catch (e) { console.warn("지갑 조회 실패:", e.message); }
+      }
 
       const statePositions = Object.keys(S.state?.positions || {});
       const snapTokens = (S.snapshot?.tokens || []).map((t) => ({ mint: t.mint, amount: t.amount, decimals: t.decimals, account: t.account }));
       const mints = (wallet && wallet.tokenOk)
         ? wallet.tokens.map((t) => t.mint)
-        : [...new Set([...snapTokens.map((t) => t.mint), ...statePositions])];
+        : [...new Set([...(S.tokens.length ? S.tokens : snapTokens).map((t) => t.mint), ...statePositions])];
 
       let prices = {};
       let priceErr = null;
-      try { prices = await fetchPrices(mints); } catch (e) { priceErr = e; }
+      if (needPrices) {
+        try {
+          prices = await fetchPrices(mints);
+          if (Object.keys(prices).length) S.lastPrices = Date.now();
+        } catch (e) { priceErr = e; }
+      }
 
       // 시세 병합: 라이브 → 직전 값 → 봇 스냅샷
       if (Object.keys(prices).length) S.prices = { ...S.prices, ...prices };
@@ -1176,10 +1199,19 @@
 
       if (wallet && wallet.sol != null) {
         S.sol = wallet.sol;
-        S.tokens = wallet.tokenOk ? wallet.tokens : (S.tokens.length ? S.tokens : snapTokens);
+        if (wallet.tokenOk) { S.tokens = wallet.tokens; S.lastTokens = Date.now(); }
+        else if (!S.tokens.length) S.tokens = snapTokens;
         S.mode = "live";
         S.lastLive = Date.now();
+        S.failStreak = 0;
+        S.backoffUntil = 0;
         setStatus("live", "실시간 · " + hhmm(Date.now() / 1000) + " 갱신");
+      } else if (S.lastLive) {
+        // 직전 실시간 값을 유지하고 지연만 표시 (스냅샷보다 최신)
+        S.mode = "stale";
+        S.failStreak = (S.failStreak || 0) + 1;
+        if (S.failStreak >= 2) S.backoffUntil = Date.now() + 20000;
+        setStatus("", "일시 지연 · " + Math.round((Date.now() - S.lastLive) / 1000) + "초 전 값");
       } else if (S.snapshot) {
         S.sol = Number(S.snapshot.sol || 0);
         S.tokens = snapTokens;
@@ -1191,13 +1223,13 @@
       }
 
       $("diagLine").textContent = "RPC " + (rpcDiag || "—") +
-        " · 시세 " + Object.keys(S.prices).length + "종" + (priceErr ? " (일부 실패)" : "");
+        " · 시세 " + Object.keys(S.prices).length + "종" + ((priceErr || !S.lastPrices) ? " (일부 실패)" : "");
 
       renderHero();
       renderPositions();
       renderCharts();
       countdown = LIVE_MS / 1000;
-      if (manual) toast(S.mode === "live" ? "새로고침 완료" : "새로고침 완료 (스냅샷)");
+      if (manual) toast(S.mode === "live" ? "새로고침 완료" : (S.mode === "stale" ? "지연 상태 유지" : "스냅샷 표시 중"));
     } finally {
       busy = false;
       $("refreshBtn").classList.remove("spin");
