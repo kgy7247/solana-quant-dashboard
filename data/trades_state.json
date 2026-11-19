@@ -1,26 +1,5 @@
 {
-  "positions": {
-    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
-      "symbol": "mihao",
-      "entry_sol": 0.58,
-      "entry_time": 1795102735.5986414,
-      "buy_sig": "2gzJNwzUsHDUAfjkqAr7aTRd6US1fEXpdaAEcs48fb85qarD9LPqt67hJhM9Rc1NpHPFah1jmxsWYq4dZaaJ7V1s",
-      "quant_score": 100,
-      "reasons": [
-        "EMA9>21",
-        "BB_Breakout",
-        "Donchian20_High",
-        "RSI(74)",
-        "Vol4.0x+Buy2.6x",
-        "rug_ok(1)"
-      ],
-      "entry_tokens": 3700.690459,
-      "actual_sol_spent": 0.582866832,
-      "price_impact_pct": 0.008355,
-      "signal_source": "quant_engine 1h multi-indicator breakout (100/100)",
-      "logged_at": 1795102746.837611
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -85,6 +64,28 @@
       "sol": 0.58,
       "sig": "2gzJNwzUsHDUAfjkqAr7aTRd6US1fEXpdaAEcs48fb85qarD9LPqt67hJhM9Rc1NpHPFah1jmxsWYq4dZaaJ7V1s",
       "time": 1795102735.598645
+    },
+    {
+      "action": "SELL",
+      "symbol": "mihao",
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "entry_sol": 0.58,
+      "out_sol": 0.651039,
+      "pnl_sol": 0.071039,
+      "pnl_pct": 12.25,
+      "sig": "2jugknCkLyhZZXrCV1bVWE3RToNbLNaq9G4HtwNmXpkjF2SXcxiCsN4VHQQ57RSLCQfeBU5HSwqewgq7cZmeTQBe",
+      "time": 1795105352.2580857,
+      "exit_reason": "bearish_take_profit(+11.7%, m5=-6.1%)",
+      "exit_type": "early_take_profit",
+      "rule": "peak>+10% & m5<=-6%",
+      "actual_sol_spent": 0.582866832,
+      "net_sol_received": 0.651287525,
+      "pnl_sol_actual": 0.068421,
+      "pnl_pct_actual": 11.74,
+      "pnl_usd": 5.03,
+      "sol_price_exit": 73.52,
+      "confirmed": "finalized",
+      "recorded_at": 1795105362.3227592
     }
   ],
   "started_at": 1795093332.0777118

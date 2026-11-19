@@ -1,18 +1,9 @@
 {
-  "generated_at": 1795104715,
+  "generated_at": 1795105374,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
-  "sol": 1.357419919,
-  "sol_usd": 73.82,
-  "tokens": [
-    {
-      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
-      "amount": 3700.690459,
-      "symbol": "mihao",
-      "usd_price": 0.0136,
-      "usd_value": 50.329390242399995,
-      "change24": 91.81
-    }
-  ],
-  "total_usd": 150.53412866297998,
+  "sol": 2.008707445,
+  "sol_usd": 73.54,
+  "tokens": [],
+  "total_usd": 147.72034550530003,
   "errors": []
 }
