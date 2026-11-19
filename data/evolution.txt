@@ -6,3 +6,5 @@
 2026-11-19T15:38Z | v3 | trade | mihao BUY 0.58SOL score=100/100 | EMA9>21 · BB_Breakout · Donchian20_High · RSI74 · Vol4.0x+Buy2.6x · rug_ok
 2026-11-19T15:41Z | v3 | init | 자가진화 로그 기록 개시 | 대시보드 배포 시점 기준 · 이후 엔진이 파라미터 변경 시 append
 2026-11-19T16:22Z | v3 | trade | mihao SELL +11.7% (0.651287 SOL 실수령, 수수료 차감 후 순 +0.068421 SOL ≈ $5.03) | 신규 룰 bearish_take_profit 발동: 고점 +11.7% & m5 -6.1% → 전량 익절, tx 2jugknCk…zmeTQBe
+2026-11-19T17:03Z | v3 | trade | mihao BUY 0.6026SOL score=80/100 | 30% 동적 복리 눌림목 재돌파 진입 (RSI 69.5, Vol 4.4x+Buy 2.1x, tx 3mqp9JW5…FGT9gE)
+2026-11-19T17:16Z | v3 | audit | 1h 자가진화 점검: 이상무 (v3 유지) | 최근 손절 0건, mihao 2차 진입 +3.25% 순항 중. X 내러티브 분산·메이저 7점대 횡보로 min_score=72 유지가 최적
