@@ -790,8 +790,11 @@
       const pos = positions[t.mint] || null;
       const p = S.prices[t.mint] || null;
       const usd = p ? t.amount * p.usd : null;
-      const entryPriceSol = pos && pos.entry_tokens ? pos.entry_sol / pos.entry_tokens
-        : (pos && pos.actual_sol_spent && pos.entry_tokens ? pos.actual_sol_spent / pos.entry_tokens : null);
+      const entryTokens = pos ? (pos.entry_tokens || pos.token_amount || t.amount) : null;
+      const entrySolAmt = pos ? (pos.actual_sol_spent || pos.entry_sol) : null;
+      const entryPriceSol = pos
+        ? (pos.entry_price_sol || (entrySolAmt && entryTokens ? entrySolAmt / entryTokens : null))
+        : null;
       const curPriceSol = (p && S.prices[SOL_MINT]?.usd) ? p.usd / S.prices[SOL_MINT].usd : null;
       rows.push({
         mint: t.mint,

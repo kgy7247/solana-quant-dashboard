@@ -7,6 +7,7 @@
       "buy_sig": "617AqDXwGYnzEk2wgdmLQa9uLXnEwtJhft8y4Fdzgh5D3QMMKFw9cqFFFPTP69jM4Fa8Fw3SLVFe6Cqq6dWdFVgj",
       "quant_score": 80,
       "token_amount": 17784.616161,
+      "entry_tokens": 17784.616161,
       "actual_sol_spent": 0.612195464,
       "entry_price_sol": 3.4422754e-05,
       "confirmed": "finalized"
