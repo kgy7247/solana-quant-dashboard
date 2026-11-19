@@ -673,6 +673,7 @@
     if (evo.status === "fulfilled") { S.evolution = parseEvolution(evo.value); }
     S.staticOk = st.status === "fulfilled" || cfg.status === "fulfilled";
 
+    applySnapshot();
     renderAll();
     $("histHint").textContent = S.state ? `trades_state.json · ${(S.state.history || []).length}건` : "데이터 없음";
     $("evoHint").textContent = S.evolution.length ? `evolution.txt · ${S.evolution.length}건` : "로그 없음";
@@ -1385,10 +1386,7 @@
         if (S.failStreak >= 2) S.backoffUntil = Date.now() + 20000;
         setStatus("", "일시 지연 · " + Math.round((Date.now() - S.lastLive) / 1000) + "초 전 값");
       } else if (S.snapshot) {
-        S.sol = Number(S.snapshot.sol || 0);
-        S.tokens = snapTokens;
-        S.mode = "snapshot";
-        setStatus("", "봇 스냅샷 · " + snapAge() + "분 전");
+        applySnapshot();
       } else {
         S.mode = "none";
         setStatus("err", "데이터 없음 · 재시도 중");
@@ -1414,6 +1412,26 @@
   function snapAge() {
     if (!S.snapshot?.generated_at) return "—";
     return Math.max(0, Math.round((Date.now() / 1000 - S.snapshot.generated_at) / 60));
+  }
+
+  /** RPC 응답 전·불가 시에도 봇 스냅샷으로 바로 화면을 채운다 */
+  function applySnapshot() {
+    if (!S.snapshot || S.mode === "live" || S.mode === "stale") return false;
+    if (!(S.snapshot.sol || S.snapshot.tokens)) return false;
+    S.sol = Number(S.snapshot.sol || 0);
+    S.tokens = (S.snapshot.tokens || []).map((t) => ({ mint: t.mint, amount: t.amount, decimals: t.decimals, account: t.account }));
+    if (!(S.prices[SOL_MINT] && S.prices[SOL_MINT].usd) && S.snapshot.sol_usd) {
+      S.prices[SOL_MINT] = { usd: S.snapshot.sol_usd, source: "snapshot", change24: null };
+    }
+    for (const t of (S.snapshot.tokens || [])) {
+      if (!S.prices[t.mint] && t.usd_price) {
+        S.prices[t.mint] = { usd: t.usd_price, symbol: t.symbol, source: "snapshot", change24: t.change24 ?? null };
+      }
+    }
+    S.solUsd = S.prices[SOL_MINT]?.usd ?? null;
+    S.mode = "snapshot";
+    setStatus("", "봇 스냅샷 · " + snapAge() + "분 전");
+    return true;
   }
 
   async function refreshStatic(manual = false) {
