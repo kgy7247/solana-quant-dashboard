@@ -1,0 +1,91 @@
+{
+  "positions": {
+    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
+      "symbol": "mihao",
+      "entry_sol": 0.58,
+      "entry_time": 1795102735.5986414,
+      "buy_sig": "2gzJNwzUsHDUAfjkqAr7aTRd6US1fEXpdaAEcs48fb85qarD9LPqt67hJhM9Rc1NpHPFah1jmxsWYq4dZaaJ7V1s",
+      "quant_score": 100,
+      "reasons": [
+        "EMA9>21",
+        "BB_Breakout",
+        "Donchian20_High",
+        "RSI(74)",
+        "Vol4.0x+Buy2.6x",
+        "rug_ok(1)"
+      ],
+      "entry_tokens": 3700.690459,
+      "actual_sol_spent": 0.582866832,
+      "price_impact_pct": 0.008355,
+      "signal_source": "quant_engine 1h multi-indicator breakout (100/100)",
+      "logged_at": 1795102746.837611
+    }
+  },
+  "history": [
+    {
+      "action": "BUY",
+      "symbol": "PUMP",
+      "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "sol": 0.25,
+      "sig": "22MDswHnPPCDG3nH1F3J1vonTmniBc7AjKfipUn4eNjRsKPUKRPWGAxFqxs2TdSTeXg4HFmMqzFBKKhnzxMSvGwV",
+      "time": 1795093332.0777168
+    },
+    {
+      "action": "BUY",
+      "symbol": "PIPPIN",
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "sol": 0.25,
+      "sig": "FtMNZc9cLkUQQMQb5SiD3r7WserxZ2AoWBRyAd3NngjAkntbqbS1A5XQF5mLGpAmNnzFFkmjmsNsuCYaPXhQ11x",
+      "time": 1795093339.2515922
+    },
+    {
+      "action": "SELL",
+      "symbol": "PUMP",
+      "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "entry_sol": 0.25,
+      "out_sol": 0.25045,
+      "pnl_sol": 0.00045,
+      "pnl_pct": 0.18,
+      "sig": "W7F48xePHLKFEgWCzhRX5hMetAoQVjTvB1sEiw4UJqeZVrZ8kAin7yDfTrBJQdAKYr9rNW8zvpU3Pn3Ve7pHakw",
+      "time": 1795095294.516302
+    },
+    {
+      "action": "SELL",
+      "symbol": "PIPPIN",
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "entry_sol": 0.25,
+      "out_sol": 0.248342,
+      "pnl_sol": -0.001658,
+      "pnl_pct": -0.66,
+      "sig": "3idpRp9G9WByacBiPdwaehLt7r7sVePvCD3w3zXtomoYDhdePeNyh3eYhjhBWL3yqwy8K43pHUWcYw6K34U6brSy",
+      "time": 1795095297.1205661
+    },
+    {
+      "action": "CORE_BUY",
+      "symbol": "JLP",
+      "mint": "27G8MtK7VtTcCHkpASjSDdkWWYfoqT6ggEuKidVJidD4",
+      "sol": 0.25,
+      "jlp_out": 4.965732,
+      "sig": "4Um3ssHNUuMi5PNjDeReX7HewYtf8GBS9XP513ztbfi5ZsJxQwoq92LqLXM35y6bord4qhx2oE3XmoQPShsynfZd",
+      "time": 1795101664.963081
+    },
+    {
+      "action": "CORE_EXIT",
+      "symbol": "JLP",
+      "mint": "27G8MtK7VtTcCHkpASjSDdkWWYfoqT6ggEuKidVJidD4",
+      "jlp_in": 5.760304,
+      "out_sol": 0.289475,
+      "sig": "52owR3eGPFaoxZGbz8GytbqGxakxuQQ9QJshWwnKC9XS6ZczGgYk2Ho6rcEXewnbZ7pkueCKyjLDxnifgncnQ9XK",
+      "time": 1795102097.6688557
+    },
+    {
+      "action": "BUY",
+      "symbol": "mihao",
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "sol": 0.58,
+      "sig": "2gzJNwzUsHDUAfjkqAr7aTRd6US1fEXpdaAEcs48fb85qarD9LPqt67hJhM9Rc1NpHPFah1jmxsWYq4dZaaJ7V1s",
+      "time": 1795102735.598645
+    }
+  ],
+  "started_at": 1795093332.0777118
+}
