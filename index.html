@@ -213,6 +213,7 @@
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
         <span class="subtxt mono" id="totalSol">— SOL</span>
         <span class="pill flat" id="pnlPill">—</span>
+        <span class="pill flat" id="srcPill">—</span>
       </div>
       <div class="divider"></div>
       <div class="label" style="font-size:10.5px;margin-bottom:4px">실시간 자산 추이 <span style="color:var(--muted-2);text-transform:none;letter-spacing:0">· 이 기기 관측</span></div>
@@ -314,6 +315,7 @@
     <div class="l">
       데이터 · Solana Mainnet RPC / DexScreener / Jupiter · 15초 자동 갱신 ·
       <span id="footUpdated">—</span>
+      <span id="diagLine" style="color:var(--muted-2)"></span>
     </div>
     <div>투자 권유가 아닙니다 · 봇 공개 주소 기준 조회</div>
   </footer>
@@ -328,8 +330,9 @@
   const WALLET = "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L";
   const SOL_MINT = "So11111111111111111111111111111111111111112";
   const RPCS = [
+    "https://solana-rpc.publicnode.com",
     "https://api.mainnet-beta.solana.com",
-    "https://solana-rpc.publicnode.com"
+    "https://solana.drpc.org"
   ];
   const TOKEN_PROGRAMS = [
     "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",   // SPL Token
@@ -344,12 +347,14 @@
     cfg: null,
     state: null,
     evolution: [],
+    snapshot: null,
     sol: 0,
     tokens: [],
     prices: {},
     solUsd: null,
     lastLive: null,
     lastStatic: null,
+    mode: "none",
     liveOk: false,
     staticOk: false
   };
@@ -408,11 +413,11 @@
   }
   function fullTime(ts) {
     if (!ts) return "—";
-    return new Date(ts * 1000).toLocaleString("ko-KR", { ...KST, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+    return new Date(ts * 1000).toLocaleString("ko-KR", { ...KST, hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
   }
   function isoShort(ms) {
     if (!ms) return "—";
-    return new Date(ms).toLocaleString("ko-KR", { ...KST, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    return new Date(ms).toLocaleString("ko-KR", { ...KST, hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
   }
 
   /* ===================== 네트워크 ===================== */
@@ -420,52 +425,65 @@
     const ctrl = new AbortController();
     const to = setTimeout(() => ctrl.abort(), opt.timeout || 12000);
     try {
-      const r = await fetch(url, { ...opt, signal: ctrl.signal, cache: opt.cache || "no-store" });
+      const r = await fetch(url, { signal: ctrl.signal });
       if (!r.ok) throw new Error("HTTP " + r.status);
       return await r.json();
     } finally { clearTimeout(to); }
   }
 
+  const hostOf = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch (e) { return u; } };
+  let rpcBase = null;          // 마지막으로 성공한 엔드포인트를 기억해 먼저 시도
+  let rpcDiag = "";
+
+  async function rpcOnce(base, method, params) {
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), 8000);
+    try {
+      const r = await fetch(base, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jsonrpc: "2.0", id: Math.floor(Math.random() * 1e7), method, params }),
+        signal: ctrl.signal
+      });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const j = await r.json();
+      if (j.error) throw new Error(j.error.message || "RPC error");
+      return j.result;
+    } finally { clearTimeout(to); }
+  }
+
   async function rpc(method, params) {
-    let lastErr = null;
-    for (const base of RPCS) {
-      for (let attempt = 0; attempt < 2; attempt++) {
-        try {
-          const ctrl = new AbortController();
-          const to = setTimeout(() => ctrl.abort(), 9000);
-          let r;
-          try {
-            r = await fetch(base, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ jsonrpc: "2.0", id: Math.floor(Math.random() * 1e7), method, params }),
-              signal: ctrl.signal,
-              cache: "no-store"
-            });
-          } finally { clearTimeout(to); }
-          if (!r.ok) throw new Error("HTTP " + r.status);
-          const j = await r.json();
-          if (j.error) throw new Error(j.error.message || "RPC error");
-          return j.result;
-        } catch (e) {
-          lastErr = e;
-          await sleep(350);
-        }
+    const order = rpcBase ? [rpcBase].concat(RPCS.filter((b) => b !== rpcBase)) : RPCS.slice();
+    const errs = [];
+    for (const base of order) {
+      try {
+        const out = await rpcOnce(base, method, params);
+        rpcBase = base;
+        rpcDiag = hostOf(base);
+        return out;
+      } catch (e) {
+        errs.push(hostOf(base) + ":" + (e.name === "AbortError" ? "timeout" : (e.message || "fail")));
       }
     }
-    throw lastErr || new Error("RPC 실패");
+    rpcDiag = errs.join(" / ");
+    throw new Error(rpcDiag);
   }
 
   async function fetchWallet() {
-    const bal = await rpc("getBalance", [WALLET]);
-    const lamports = bal.value || 0;
+    const errs = [];
+    let solLamports = null;
+
+    try {
+      const bal = await rpc("getBalance", [WALLET]);
+      solLamports = bal && typeof bal.value === "number" ? bal.value : null;
+    } catch (e) { errs.push("balance(" + e.message + ")"); }
 
     const tokens = [];
-    let anyProgram = false;
+    let tokenOk = false;
     for (const programId of TOKEN_PROGRAMS) {
       try {
         const res = await rpc("getTokenAccountsByOwner", [WALLET, { programId }, { encoding: "jsonParsed" }]);
-        anyProgram = true;
+        tokenOk = true;
         for (const acc of (res.value || [])) {
           const info = acc?.account?.data?.parsed?.info;
           if (!info || !info.tokenAmount) continue;
@@ -479,12 +497,11 @@
             program: programId
           });
         }
-      } catch (e) {
-        console.warn("token program 조회 실패", programId, e.message);
-      }
+      } catch (e) { errs.push("tokens(" + e.message + ")"); }
     }
-    if (!anyProgram) throw new Error("토큰 계정 조회 실패");
-    return { sol: lamports / 1e9, tokens };
+
+    if (solLamports === null && !tokenOk) throw new Error(errs.join(" / ") || "RPC 응답 없음");
+    return { sol: solLamports === null ? null : solLamports / 1e9, tokens, tokenOk, errs };
   }
 
   async function fetchPrices(mints) {
@@ -541,11 +558,13 @@
   /* ===================== 정적 데이터 ===================== */
   async function loadStatic() {
     const bust = "?v=" + Date.now();
-    const [st, cfg, evo] = await Promise.allSettled([
+    const [st, cfg, evo, snap] = await Promise.allSettled([
       fetchJson("./data/trades_state.json" + bust),
       fetchJson("./data/quant_config.json" + bust),
-      fetch("./data/evolution.txt" + bust, { cache: "no-store" }).then((r) => r.ok ? r.text() : Promise.reject(new Error("HTTP " + r.status)))
+      fetch("./data/evolution.txt" + bust, { cache: "no-store" }).then((r) => r.ok ? r.text() : Promise.reject(new Error("HTTP " + r.status))),
+      fetchJson("./data/wallet_snapshot.json" + bust)
     ]);
+    if (snap.status === "fulfilled" && snap.value && snap.value.wallet) S.snapshot = snap.value;
     if (st.status === "fulfilled") { S.state = st.value; }
     if (cfg.status === "fulfilled") { S.cfg = cfg.value; }
     if (evo.status === "fulfilled") { S.evolution = parseEvolution(evo.value); }
@@ -888,7 +907,7 @@
     }
 
     $("solBal").innerHTML = sol(S.sol, 4) + "<small>SOL</small>";
-    $("solBalUsd").textContent = m.solBalUsd != null ? money(m.solBalUsd) : "가격 조회 실패";
+    $("solBalUsd").textContent = m.solBalUsd != null ? money(m.solBalUsd) : "시세 조회 실패";
     const solChg = S.prices[SOL_MINT]?.change24;
     $("solChg").innerHTML = solChg != null
       ? `<span class="pill ${cls(solChg)}">${pct(solChg)}</span>` : "—";
@@ -909,6 +928,11 @@
     $("winRate").innerHTML = m.winRate != null
       ? `${fn(m.winRate, 0)}%<small style="color:var(--muted)"> · ${m.wins}/${m.closed.length} · ${m.openCount}슬롯</small>`
       : "—";
+
+    const srcPill = $("srcPill");
+    if (S.mode === "live") { srcPill.className = "pill up"; srcPill.textContent = "LIVE"; }
+    else if (S.mode === "snapshot") { srcPill.className = "pill warn"; srcPill.textContent = "SNAPSHOT " + snapAge() + "m"; }
+    else if (S.mode === "none") { srcPill.className = "pill down"; srcPill.textContent = "NO DATA"; }
 
     $("footUpdated").textContent = "최종 갱신 " + isoShort(Date.now());
   }
@@ -1125,38 +1149,64 @@
     busy = true;
     $("refreshBtn").classList.add("spin");
     try {
-      let wallet = null, walletErr = null;
-      try { wallet = await fetchWallet(); } catch (e) { walletErr = e; }
+      let wallet = null;
+      try { wallet = await fetchWallet(); } catch (e) { console.warn("지갑 조회 실패:", e.message); }
 
-      const mints = wallet ? wallet.tokens.map((t) => t.mint) : Object.keys(S.state?.positions || {});
+      const statePositions = Object.keys(S.state?.positions || {});
+      const snapTokens = (S.snapshot?.tokens || []).map((t) => ({ mint: t.mint, amount: t.amount, decimals: t.decimals, account: t.account }));
+      const mints = (wallet && wallet.tokenOk)
+        ? wallet.tokens.map((t) => t.mint)
+        : [...new Set([...snapTokens.map((t) => t.mint), ...statePositions])];
+
       let prices = {};
-      try { prices = await fetchPrices(mints); } catch (e) { console.warn("가격 조회 실패", e.message); }
+      let priceErr = null;
+      try { prices = await fetchPrices(mints); } catch (e) { priceErr = e; }
 
-      if (wallet) {
-        S.sol = wallet.sol;
-        S.tokens = wallet.tokens;
-      }
+      // 시세 병합: 라이브 → 직전 값 → 봇 스냅샷
       if (Object.keys(prices).length) S.prices = { ...S.prices, ...prices };
+      if (!(S.prices[SOL_MINT] && S.prices[SOL_MINT].usd) && S.snapshot?.sol_usd) {
+        S.prices[SOL_MINT] = { usd: S.snapshot.sol_usd, source: "snapshot", change24: null };
+      }
+      for (const t of (S.snapshot?.tokens || [])) {
+        if (!S.prices[t.mint] && t.usd_price) {
+          S.prices[t.mint] = { usd: t.usd_price, symbol: t.symbol, source: "snapshot", change24: t.change24 ?? null };
+        }
+      }
       S.solUsd = S.prices[SOL_MINT]?.usd ?? null;
 
-      if (wallet) {
+      if (wallet && wallet.sol != null) {
+        S.sol = wallet.sol;
+        S.tokens = wallet.tokenOk ? wallet.tokens : (S.tokens.length ? S.tokens : snapTokens);
+        S.mode = "live";
         S.lastLive = Date.now();
-        S.liveOk = true;
         setStatus("live", "실시간 · " + hhmm(Date.now() / 1000) + " 갱신");
+      } else if (S.snapshot) {
+        S.sol = Number(S.snapshot.sol || 0);
+        S.tokens = snapTokens;
+        S.mode = "snapshot";
+        setStatus("", "봇 스냅샷 · " + snapAge() + "분 전");
       } else {
-        S.liveOk = false;
-        setStatus("err", "RPC 오류 · 재시도 중");
-        console.warn("지갑 조회 실패", walletErr?.message);
+        S.mode = "none";
+        setStatus("err", "데이터 없음 · 재시도 중");
       }
+
+      $("diagLine").textContent = "RPC " + (rpcDiag || "—") +
+        " · 시세 " + Object.keys(S.prices).length + "종" + (priceErr ? " (일부 실패)" : "");
+
       renderHero();
       renderPositions();
       renderCharts();
       countdown = LIVE_MS / 1000;
-      if (manual) toast("새로고침 완료");
+      if (manual) toast(S.mode === "live" ? "새로고침 완료" : "새로고침 완료 (스냅샷)");
     } finally {
       busy = false;
       $("refreshBtn").classList.remove("spin");
     }
+  }
+
+  function snapAge() {
+    if (!S.snapshot?.generated_at) return "—";
+    return Math.max(0, Math.round((Date.now() / 1000 - S.snapshot.generated_at) / 60));
   }
 
   async function refreshStatic(manual = false) {
@@ -1186,7 +1236,7 @@
     setInterval(() => {
       const s = Math.max(0, countdown - 1);
       countdown = s;
-      if (S.liveOk && !busy) $("statusText").textContent = `실시간 · ${s}초 후 갱신`;
+      if (S.mode === "live" && !busy) $("statusText").textContent = `실시간 · ${s}초 후 갱신`;
     }, 1000);
     $("refreshBtn").addEventListener("click", async () => { await refreshStatic(true); refreshLive(true); });
   }
