@@ -8,3 +8,4 @@
 2026-11-19T16:22Z | v3 | trade | mihao SELL +11.7% (0.651287 SOL 실수령, 수수료 차감 후 순 +0.068421 SOL ≈ $5.03) | 신규 룰 bearish_take_profit 발동: 고점 +11.7% & m5 -6.1% → 전량 익절, tx 2jugknCk…zmeTQBe
 2026-11-19T17:03Z | v3 | trade | mihao BUY 0.6026SOL score=80/100 | 30% 동적 복리 눌림목 재돌파 진입 (RSI 69.5, Vol 4.4x+Buy 2.1x, tx 3mqp9JW5…FGT9gE)
 2026-11-19T17:16Z | v3 | audit | 1h 자가진화 점검: 이상무 (v3 유지) | 최근 손절 0건, mihao 2차 진입 +3.25% 순항 중. X 내러티브 분산·메이저 7점대 횡보로 min_score=72 유지가 최적
+2026-11-19T17:38Z | v3 | trade | mihao SELL +4.46% (0.629477 SOL 실수령, 수수료 차감 후 순 +0.026850 SOL ≈ $1.99) | 트레일링 스탑 익절 발동: 고점 +14.0% → +5.16%로 후퇴(trailing_activate 6% / drop 3%) → 전량 익절, tx 5yhrDhX3…qNij
