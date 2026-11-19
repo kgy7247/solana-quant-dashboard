@@ -1,5 +1,17 @@
 {
-  "positions": {},
+  "positions": {
+    "ApZuxdpzMrbEYTGEzeY9afh5pj9d6qPRJCTgQYiipbKg": {
+      "symbol": "CYBERLEEK",
+      "entry_sol": 0.6107,
+      "entry_time": 1795121707.2427988,
+      "buy_sig": "617AqDXwGYnzEk2wgdmLQa9uLXnEwtJhft8y4Fdzgh5D3QMMKFw9cqFFFPTP69jM4Fa8Fw3SLVFe6Cqq6dWdFVgj",
+      "quant_score": 80,
+      "token_amount": 17784.616161,
+      "actual_sol_spent": 0.612195464,
+      "entry_price_sol": 3.4422754e-05,
+      "confirmed": "finalized"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -128,6 +140,28 @@
       "confirmed": "finalized",
       "slot": 471422088,
       "recorded_at": 1795109881.318814
+    },
+    {
+      "action": "BUY",
+      "symbol": "CYBERLEEK",
+      "mint": "ApZuxdpzMrbEYTGEzeY9afh5pj9d6qPRJCTgQYiipbKg",
+      "sol": 0.6107,
+      "sig": "617AqDXwGYnzEk2wgdmLQa9uLXnEwtJhft8y4Fdzgh5D3QMMKFw9cqFFFPTP69jM4Fa8Fw3SLVFe6Cqq6dWdFVgj",
+      "time": 1795121707.2427988,
+      "quant_score": 80,
+      "reasons": [
+        "EMA9>21",
+        "BB_Breakout",
+        "RSI(69.7)",
+        "Vol6.77x+Buy1.42x",
+        "rug_ok(7)"
+      ],
+      "token_amount": 17784.616161,
+      "actual_sol_spent": 0.612195464,
+      "confirmed": "finalized",
+      "price_impact_pct": 0.3266,
+      "liquidity_usd": 437090,
+      "vol24_usd": 1070352
     }
   ],
   "started_at": 1795093332.0777118

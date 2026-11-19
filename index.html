@@ -637,23 +637,38 @@
       } catch (e) { console.warn("dexscreener 실패", e.message); }
     }
 
-    // 2) Jupiter lite (누락분 보완)
-    const missing = uniq.filter((m) => !out[m]);
-    if (missing.length) {
+    // 2) Jupiter lite (누락분 보완 + 교차검증)
+    //    배치 응답은 상위 페어로 잘리므로, 얇고 가격이 어긋난 풀이 '유동성 최대'로 잡힐 수 있다.
+    //    Jupiter 가격과 25% 넘게 벌어지면 Jupiter 값을 채택한다.
+    const jupMints = uniq.filter((m) => m !== SOL_MINT);
+    const jup = {};
+    if (jupMints.length) {
       try {
-        const j = await fetchJson("https://lite-api.jup.ag/price/v3?ids=" + missing.join(","));
-        for (const m of missing) {
+        const j = await fetchJson("https://lite-api.jup.ag/price/v3?ids=" + jupMints.join(","));
+        for (const m of jupMints) {
           const d = j?.[m];
-          if (d && isFinite(d.usdPrice) && d.usdPrice > 0) {
-            out[m] = {
-              usd: Number(d.usdPrice), liq: Number(d.liquidity || 0),
-              symbol: null, name: null,
-              change24: d.priceChange24h != null ? Number(d.priceChange24h) : null,
-              dex: "jupiter", source: "jupiter"
-            };
-          }
+          if (d && isFinite(d.usdPrice) && d.usdPrice > 0) jup[m] = d;
         }
       } catch (e) { console.warn("jupiter 실패", e.message); }
+    }
+    for (const m of uniq) {
+      const d = jup[m];
+      if (!d) continue;
+      const jp = Number(d.usdPrice);
+      const prev = out[m];
+      if (!prev) {
+        out[m] = {
+          usd: jp, liq: Number(d.liquidity || 0),
+          symbol: null, name: null,
+          change24: d.priceChange24h != null ? Number(d.priceChange24h) : null,
+          dex: "jupiter", source: "jupiter"
+        };
+      } else if (prev.usd > 0 && Math.abs(prev.usd - jp) / prev.usd > 0.25) {
+        console.warn("시세 불일치 " + m.slice(0, 8), prev.usd, "→ jupiter", jp);
+        prev.dexUsd = prev.usd;
+        prev.usd = jp;
+        prev.source = "jupiter";
+      }
     }
     return out;
   }
