@@ -14,3 +14,4 @@
 2026-11-19T20:15Z | v4 | audit | 1h 자가진화 점검: 이상무 (v4 유지) | 잔고 2.035558 SOL($148.96, SOL -0.88%/1h), 손절 0건. pippin 59점(거래량 0.44x)·나머지 7점대로 새벽 저거래량 횡보장 필터링 중 (X 내러티브 특이 쏠림 없음)
 2026-11-19T20:52Z | v5 | upgrade | 스캔 범위 2배 확장 (trending 1~2p + DexScreener 부스트 · min_liq $400K→$250K · min_vol24 $1M→$500K · max_pools 6→8) | 새벽 저거래량 장에서 중소형 모멘텀 포착력 강화 (건엽님 요청 반영)
 2026-11-19T20:55Z | v5 | trade | CYBERLEEK BUY 0.6107SOL score=80/100 | 0.6107 SOL 동적 복리 슬롯 진입(잔고 2.0356 SOL의 30%), 실지출 0.612195 SOL → 17,784.62 CYBERLEEK 수령(진입가 0.00003442 SOL/토큰), priceImpact 0.3266% (기준 2.0% 이내) | 신호: EMA9>21·BB_Breakout·RSI 69.7·Vol 6.77x+Buy 1.42x·rug_ok(7), 유동성 $437K·24h $1.07M·홀더 51,568 | 민트/프리즈 권한 없음·매도 라우트 정상 확인, tx 617AqD…WdFVgj
+2026-11-19T21:11Z | v5 | trade | CYBERLEEK SELL -9.05% (net 0.556785 SOL 수령, 순 -0.055411 SOL ≈ -$4.03) | 손절선(-5%) 돌파 청산(-9.3% 지연 집행) + check.sh 셸 따옴표 버그 수정 반영, tx 5eSfmJms…QTpz4SK, 전량 SOL 회수 후 슬롯 대기

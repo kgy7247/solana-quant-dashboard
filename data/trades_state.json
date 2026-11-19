@@ -1,18 +1,5 @@
 {
-  "positions": {
-    "ApZuxdpzMrbEYTGEzeY9afh5pj9d6qPRJCTgQYiipbKg": {
-      "symbol": "CYBERLEEK",
-      "entry_sol": 0.6107,
-      "entry_time": 1795121707.2427988,
-      "buy_sig": "617AqDXwGYnzEk2wgdmLQa9uLXnEwtJhft8y4Fdzgh5D3QMMKFw9cqFFFPTP69jM4Fa8Fw3SLVFe6Cqq6dWdFVgj",
-      "quant_score": 80,
-      "token_amount": 17784.616161,
-      "entry_tokens": 17784.616161,
-      "actual_sol_spent": 0.612195464,
-      "entry_price_sol": 3.4422754e-05,
-      "confirmed": "finalized"
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -163,6 +150,31 @@
       "price_impact_pct": 0.3266,
       "liquidity_usd": 437090,
       "vol24_usd": 1070352
+    },
+    {
+      "action": "SELL",
+      "symbol": "CYBERLEEK",
+      "mint": "ApZuxdpzMrbEYTGEzeY9afh5pj9d6qPRJCTgQYiipbKg",
+      "entry_sol": 0.6107,
+      "out_sol": 0.55679,
+      "pnl_sol": -0.05391,
+      "pnl_pct": -8.83,
+      "sig": "5eSfmJmsrxxdixT5R7rFUAVv1qiNQsiip5vdUUFG5Mwe28zfMtCz6oUEysC71U5v4j6ipJiM4rsWNNbU1QTpz4SK",
+      "time": 1795122699.8515148,
+      "exit_reason": "stop_loss_-5.0pct",
+      "exit_type": "stop_loss",
+      "rule": "pnl_pct <= -5.0%",
+      "actual_sol_spent": 0.612195464,
+      "net_sol_received": 0.556784882,
+      "pnl_sol_actual": -0.055410582,
+      "pnl_pct_actual": -9.05,
+      "pnl_usd": -4.03,
+      "sol_price_exit": 72.74,
+      "token_amount": 17784.616161,
+      "confirmed": "finalized",
+      "tx_fee_sol": 5e-06,
+      "note": "5분 감시 check.sh 셸 따옴표 버그로 청산 지연 → -9.3%에서 긴급 전량 시장가 청산 (Raydium CP, 토큰계정 자동 close)",
+      "recorded_at": 1795122699.8515148
     }
   ],
   "started_at": 1795093332.0777118

@@ -1,18 +1,9 @@
 {
-  "generated_at": 1795121759,
+  "generated_at": 1795122711,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
-  "sol": 1.423362925,
-  "sol_usd": 73.019,
-  "tokens": [
-    {
-      "mint": "ApZuxdpzMrbEYTGEzeY9afh5pj9d6qPRJCTgQYiipbKg",
-      "amount": 17784.616160554,
-      "symbol": "CYBERLEEK",
-      "usd_price": 0.0025190772929141307,
-      "usd_value": 44.80082273324527,
-      "change24": null
-    }
-  ],
-  "total_usd": 148.73336015382029,
+  "sol": 1.980147807,
+  "sol_usd": 72.77,
+  "tokens": [],
+  "total_usd": 144.09535591539,
   "errors": []
 }
