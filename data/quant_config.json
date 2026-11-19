@@ -1,9 +1,9 @@
 {
-  "version": 4,
+  "version": 5,
   "min_score": 72,
   "min_buy_ratio": 1.1,
-  "min_liq_usd": 400000,
-  "min_vol24_usd": 1000000,
+  "min_liq_usd": 250000,
+  "min_vol24_usd": 500000,
   "max_h24_pct": 250,
   "sol_crash_h1_pct": -2.5,
   "sizing_mode": "compounding_pct",
