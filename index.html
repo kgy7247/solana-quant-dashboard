@@ -68,7 +68,7 @@
   .brand .sub{margin:2px 0 0;color:var(--muted);font-size:12px;font-family:var(--mono)}
   .brand .sub a{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted-2)}
   .brand .sub a:hover{color:var(--txt)}
-  .head-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .head-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
   .status{display:flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;
     background:var(--panel);border:1px solid var(--line);font-size:12px;color:var(--muted);white-space:nowrap}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 0 rgba(255,176,32,.5);
@@ -81,6 +81,15 @@
   .icon-btn:hover{background:var(--panel-2);border-color:var(--line-2)}
   .icon-btn.spin svg{animation:spin .9s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* 통화 토글 */
+  .seg{display:inline-flex;align-items:center;gap:2px;padding:3px;border-radius:12px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line)}
+  .seg button{appearance:none;border:0;background:none;color:var(--muted);cursor:pointer;
+    font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:6px 12px;border-radius:9px;
+    transition:background .18s,color .18s;white-space:nowrap}
+  .seg button:hover{color:var(--txt);background:rgba(255,255,255,.05)}
+  .seg button.on{color:#08080e;background:linear-gradient(135deg,#c4b5fd,#14F195);box-shadow:0 2px 12px rgba(153,69,255,.28)}
 
   /* ---------- cards ---------- */
   .card{
@@ -206,6 +215,11 @@
       <p class="sub" id="walletLine">bot wallet · <a id="walletLink" href="#" target="_blank" rel="noopener">—</a></p>
     </div>
     <div class="head-right">
+      <div class="seg" id="curToggle" role="group" aria-label="표시 통화">
+        <button type="button" data-cur="SOL">SOL</button>
+        <button type="button" data-cur="USD" class="on">USD</button>
+        <button type="button" data-cur="KRW">KRW</button>
+      </div>
       <div class="status"><span class="dot" id="dot"></span><span id="statusText">연결 중…</span></div>
       <button class="icon-btn" id="refreshBtn" title="지금 새로고침" aria-label="새로고침">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
@@ -261,11 +275,11 @@
   <!-- CHARTS -->
   <div class="grid two">
     <div class="card">
-      <h2><span class="bar"></span>누적 손익 추이<span class="hint" id="pnlHint">실현 손익 (SOL) · 마지막 점 = 미실현 포함</span></h2>
+      <h2><span class="bar"></span>누적 손익 추이<span class="hint" id="pnlHint">실현 손익 · 마지막 점 = 미실현 포함</span></h2>
       <div class="chart-box h240"><canvas id="pnlChart"></canvas></div>
     </div>
     <div class="card">
-      <h2><span class="bar"></span>자산 구성<span class="hint" id="allocHint">USD 기준</span></h2>
+      <h2><span class="bar"></span>자산 구성<span class="hint" id="allocHint">비중 기준</span></h2>
       <div class="chart-box h240"><canvas id="allocChart"></canvas></div>
     </div>
   </div>
@@ -313,7 +327,7 @@
         <thead>
           <tr>
             <th>시각</th><th>토큰</th><th>구분</th><th>투입 SOL</th><th>회수 SOL</th>
-            <th>손익 SOL</th><th>손익 %</th><th>트랜잭션</th>
+            <th>손익</th><th>손익 %</th><th>트랜잭션</th>
           </tr>
         </thead>
         <tbody id="histBody"><tr><td colspan="8" class="empty">불러오는 중…</td></tr></tbody>
@@ -370,6 +384,9 @@
     failStreak: 0,
     backoffUntil: 0,
     mode: "none",
+    currency: "USD",
+    krw: null,
+    krwSource: "",
     liveOk: false,
     staticOk: false
   };
@@ -417,6 +434,60 @@
     return fn(v, 6);
   }
   const shortMint = (m) => m ? m.slice(0, 4) + "…" + m.slice(-4) : "?";
+
+  /* ---------- 통화 표시 (내부 계산은 SOL·USD 유지, 표시 시점에 변환) ---------- */
+  function valueIn(v, base) {
+    if (v == null || !isFinite(v)) return null;
+    const c = S.currency;
+    if (c === base) return v;
+    if (base === "SOL") {
+      if (!S.solUsd) return null;
+      if (c === "USD") return v * S.solUsd;
+      if (c === "KRW") return S.krw ? v * S.solUsd * S.krw : null;
+    } else if (base === "USD") {
+      if (c === "SOL") return S.solUsd ? v / S.solUsd : null;
+      if (c === "KRW") return S.krw ? v * S.krw : null;
+    }
+    return null;
+  }
+  function numStr(val, opts = {}) {
+    if (val == null || !isFinite(val)) return "—";
+    const c = S.currency;
+    const a = Math.abs(val);
+    if (c === "SOL") return (opts.signed && val > 0 ? "+" : "") + fn(val, a >= 100 ? 2 : 4) + (opts.bare ? "" : " SOL");
+    if (c === "USD") {
+      const d = a >= 1000 ? 0 : 2;
+      return (opts.signed && val > 0 ? "+" : "") + (val < 0 ? "-$" : "$") + fn(a, d);
+    }
+    return (opts.signed && val > 0 ? "+" : "") + (val < 0 ? "-₩" : "₩") + fn(a, 0);
+  }
+  function curStr(v, base, opts = {}) {
+    if (v == null || !isFinite(v)) return "—";
+    const val = valueIn(v, base);
+    if (val == null) {
+      // 시세·환율이 없으면 원래 단위로 표시
+      if (base === "USD") return money(v, 2);
+      return (opts.signed && v > 0 ? "+" : "") + fn(v, Math.abs(v) >= 100 ? 2 : 4) + (opts.bare ? "" : " SOL");
+    }
+    return numStr(val, opts);
+  }
+  function unitFactor(base) {
+    const c = S.currency;
+    if (c === base) return 1;
+    if (base === "SOL") {
+      if (!S.solUsd) return 1;
+      return c === "USD" ? S.solUsd : (S.krw ? S.solUsd * S.krw : 1);
+    }
+    if (base === "USD") return c === "SOL" ? (S.solUsd ? 1 / S.solUsd : 1) : (S.krw || 1);
+    return 1;
+  }
+  function axisFmt(v) {
+    const c = S.currency;
+    const sign = v > 0 ? "+" : "";
+    if (c === "SOL") return sign + Number(v).toFixed(3);
+    if (c === "USD") return sign + (v < 0 ? "-$" : "$") + Math.abs(v).toFixed(2);
+    return sign + (v < 0 ? "-₩" : "₩") + Math.round(Math.abs(v)).toLocaleString("en-US");
+  }
   const esc = (s) => String(s == null ? "" : s)
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
@@ -913,23 +984,23 @@
     const m = metrics();
     S._startSol = m.estStartSol;
 
-    $("totalUsd").innerHTML = m.totalUsd != null ? money(m.totalUsd, 2) : "—";
+    $("totalUsd").innerHTML = m.totalUsd != null ? curStr(m.totalUsd, "USD") : "—";
     $("totalSol").textContent = m.totalSol != null ? sol(m.totalSol, 4) + " SOL" : "—";
 
     const pnlPill = $("pnlPill");
     if (m.totalPnlSol != null) {
       const p = m.estStartSol ? (m.totalPnlSol / m.estStartSol) * 100 : null;
       pnlPill.className = "pill " + cls(m.totalPnlSol);
-      pnlPill.textContent = `${signed(m.totalPnlSol, 4)} SOL${p != null ? " · " + pct(p) : ""}`;
+      pnlPill.textContent = `${curStr(m.totalPnlSol, "SOL", { signed: true })}${p != null ? " · " + pct(p) : ""}`;
     }
 
     $("solBal").innerHTML = sol(S.sol, 4) + "<small>SOL</small>";
-    $("solBalUsd").textContent = m.solBalUsd != null ? money(m.solBalUsd) : "시세 조회 실패";
+    $("solBalUsd").textContent = m.solBalUsd != null ? curStr(m.solBalUsd, "USD") : "시세 조회 실패";
     const solChg = S.prices[SOL_MINT]?.change24;
     $("solChg").innerHTML = solChg != null
       ? `<span class="pill ${cls(solChg)}">${pct(solChg)}</span>` : "—";
 
-    $("tokenUsd").textContent = m.tokenUsd != null ? money(m.tokenUsd) : "—";
+    $("tokenUsd").textContent = m.tokenUsd != null ? curStr(m.tokenUsd, "USD") : "—";
     $("tokenCount").textContent = S.tokens.length
       ? `보유 ${S.tokens.length}종 · 시세 ${m.pricedTokens}종`
       : "보유 토큰 없음";
@@ -938,9 +1009,9 @@
     $("mix").textContent = mixTxt;
 
     $("pnlSol").innerHTML = m.totalPnlSol != null
-      ? `<span style="color:var(--${m.totalPnlSol >= 0 ? "up" : "down"})">${signed(m.totalPnlSol, 4)}<small>SOL</small></span>`
+      ? `<span style="color:var(--${m.totalPnlSol >= 0 ? "up" : "down"})">${curStr(m.totalPnlSol, "SOL", { signed: true })}</span>`
       : "—";
-    $("pnlSub").textContent = `실현 ${signed(m.realizedSol, 4)} · 미실현 ${signed(m.unrealSol, 4)}`;
+    $("pnlSub").textContent = `실현 ${curStr(m.realizedSol, "SOL", { signed: true })} · 미실현 ${curStr(m.unrealSol, "SOL", { signed: true })}`;
 
     $("winRate").innerHTML = m.winRate != null
       ? `${fn(m.winRate, 0)}%<small style="color:var(--muted)"> · ${m.wins}/${m.closed.length} · ${m.openCount}슬롯</small>`
@@ -1014,9 +1085,9 @@
           <div><div class="nm">${esc(r.symbol)}</div>
           <div class="mt">${esc(shortMint(r.mint))}</div></div></div></td>
         <td class="mono">${amt(r.amount)}</td>
-        <td>${r.priceUsd != null ? money(r.priceUsd, 4) : "시세 없음"}
+        <td>${r.priceUsd != null ? curStr(r.priceUsd, "USD") : "시세 없음"}
           ${r.change24 != null ? `<div class="subtxt" style="font-size:10.5px;color:var(--${r.change24 >= 0 ? "up" : "down"})">${pct(r.change24, 1)}</div>` : ""}</td>
-        <td><strong>${r.usd != null ? money(r.usd) : "—"}</strong></td>
+        <td><strong>${r.usd != null ? curStr(r.usd, "USD") : "—"}</strong></td>
         <td class="mono">${r.entryPriceSol != null ? fn(r.entryPriceSol, 8) : "—"}</td>
         <td>${pnl != null ? `<span class="pill ${cls(pnl)}">${pct(pnl)}</span>` : "—"}</td>
         <td>${src}</td>
@@ -1048,7 +1119,7 @@
         <td>${tag}</td>
         <td class="mono">${h.sol != null ? fn(h.sol, 3) : (h.entry_sol != null ? fn(h.entry_sol, 3) : "—")}</td>
         <td class="mono">${h.out_sol != null ? fn(h.out_sol, 4) : "—"}</td>
-        <td class="mono" style="color:var(--${pnlSol == null ? "muted" : pnlSol >= 0 ? "up" : "down"})">${pnlSol != null ? signed(pnlSol, 4) : "—"}</td>
+        <td class="mono" style="color:var(--${pnlSol == null ? "muted" : pnlSol >= 0 ? "up" : "down"})">${pnlSol != null ? curStr(pnlSol, "SOL", { signed: true, bare: true }) : "—"}</td>
         <td>${pnlPct != null ? `<span class="pill ${cls(pnlPct)}">${pct(pnlPct)}</span>` : "—"}</td>
         <td><a class="sol" href="https://solscan.io/tx/${encodeURIComponent(h.sig)}" target="_blank" rel="noopener">${h.sig ? h.sig.slice(0, 6) + "…" + h.sig.slice(-4) : "—"}</a></td>
       </tr>`;
@@ -1076,6 +1147,12 @@
     if (!charts.pnl) return;
     const m = metrics();
     const closed = m.closed;
+    const f = unitFactor("SOL");
+    S._closed = closed;
+
+    $("pnlHint").textContent = `실현 손익 (${S.currency}) · 마지막 점 = 미실현 포함`;
+    $("barHint").textContent = `청산 손익 (${S.currency})`;
+    $("allocHint").textContent = `${S.currency} 기준`;
 
     // 1) 누적 손익
     const labels = [], data = [];
@@ -1084,11 +1161,11 @@
     for (const t of closed) {
       cum += (t.pnlSol || 0);
       labels.push(hhmm(t.time));
-      data.push(cum);
+      data.push(cum * f);
     }
     if (closed.length) {
       labels.push("현재");
-      data.push(cum + (m.unrealSol || 0));
+      data.push((cum + (m.unrealSol || 0)) * f);
     }
     charts.pnl.data.labels = labels;
     charts.pnl.data.datasets[0].data = data;
@@ -1096,6 +1173,12 @@
       i === data.length - 1 && closed.length ? "#9945FF" : "#0b0b12");
     charts.pnl.data.datasets[0].pointBorderColor = data.map((_, i) =>
       i === data.length - 1 && closed.length ? "#9945FF" : "#14F195");
+    charts.pnl.options.scales.y.ticks.callback = axisFmt;
+    charts.pnl.options.plugins.tooltip.callbacks.label = (c) => {
+      const start = m.estStartSol ? m.estStartSol * f : null;
+      const p = start ? (c.parsed.y / start) * 100 : null;
+      return numStr(c.parsed.y, { signed: true }) + (p != null ? " (" + pct(p) + ")" : "");
+    };
     charts.pnl.update();
 
     // 2) 자산 구성
@@ -1111,13 +1194,19 @@
     }
     charts.alloc.data.labels = sliced.map((x) => x[0]);
     charts.alloc.data.datasets[0].data = sliced.map((x) => x[1]);
+    charts.alloc.options.plugins.tooltip.callbacks.label = (c) => `${c.label} · ${curStr(c.parsed, "USD")}`;
     charts.alloc.update();
 
-    // 3) 거래별 실현 손익
+    // 3) 거래별 실현 손익 (선택 통화)
     charts.bar.data.labels = closed.map((t) => `${t.symbol} ${hhmm(t.time)}`);
-    charts.bar.data.datasets[0].data = closed.map((t) => Number((t.pnlPct ?? 0).toFixed(2)));
+    charts.bar.data.datasets[0].data = closed.map((t) => (t.pnlSol || 0) * f);
     charts.bar.data.datasets[0].backgroundColor = closed.map((t) =>
       (t.pnlPct ?? 0) >= 0 ? "rgba(20,241,149,.75)" : "rgba(255,77,109,.75)");
+    charts.bar.options.scales.y.ticks.callback = axisFmt;
+    charts.bar.options.plugins.tooltip.callbacks.label = (c) => {
+      const t = S._closed?.[c.dataIndex];
+      return numStr(c.parsed.y, { signed: true }) + (t && t.pnlPct != null ? ` (${pct(t.pnlPct)})` : "");
+    };
     charts.bar.update();
 
     // 4) 세션 스파크라인
@@ -1148,6 +1237,60 @@
       while (arr.length > 720) arr.shift();
       localStorage.setItem(SNAP_KEY, JSON.stringify(arr));
     } catch (e) { /* 저장 실패 무시 */ }
+  }
+
+  /* ===================== 통화 토글 · 환율 ===================== */
+  async function fetchFx() {
+    const sources = [
+      "https://open.er-api.com/v6/latest/USD",
+      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json"
+    ];
+    for (const url of sources) {
+      try {
+        const j = await fetchJson(url);
+        const rate = Number(j?.rates?.KRW ?? j?.usd?.krw);
+        if (isFinite(rate) && rate > 100) {
+          S.krw = rate;
+          S.krwSource = hostOf(url);
+          updateFxLabels();
+          return;
+        }
+      } catch (e) { console.warn("환율 조회 실패", hostOf(url), e.message); }
+    }
+    if (!S.krw) { S.krw = 1400; S.krwSource = "기본값"; }
+    updateFxLabels();
+  }
+
+  function updateFxLabels() {
+    const b = document.querySelector('#curToggle button[data-cur="KRW"]');
+    if (!b) return;
+    b.title = (S.krwSource === "기본값" || !S.krw)
+      ? "환율 조회 실패 · 기본값 ₩1,400/USD 적용"
+      : `1 USD = ₩${fn(S.krw, 0)} (${S.krwSource})`;
+  }
+
+  function setCurrency(cur) {
+    if (["SOL", "USD", "KRW"].indexOf(cur) < 0) return;
+    S.currency = cur;
+    try { localStorage.setItem("sq_currency_v1", cur); } catch (e) { /* 무시 */ }
+    document.querySelectorAll("#curToggle button").forEach((b) => b.classList.toggle("on", b.dataset.cur === cur));
+    renderHero();
+    renderPositions();
+    renderHistory();
+    renderCharts();
+  }
+
+  function initCurrency() {
+    try {
+      const saved = localStorage.getItem("sq_currency_v1");
+      if (["SOL", "USD", "KRW"].indexOf(saved) >= 0) S.currency = saved;
+    } catch (e) { /* 무시 */ }
+    document.querySelectorAll("#curToggle button").forEach((b) => {
+      b.classList.toggle("on", b.dataset.cur === S.currency);
+      b.addEventListener("click", () => setCurrency(b.dataset.cur));
+    });
+    updateFxLabels();
+    fetchFx();
   }
 
   /* ===================== 상태 표시 ===================== */
@@ -1277,6 +1420,7 @@
   async function boot() {
     initHeader();
     initCharts();
+    initCurrency();
     setStatus("", "연결 중…");
     await Promise.all([refreshStatic(), refreshLive()]);
     setInterval(() => refreshLive(false), LIVE_MS);
