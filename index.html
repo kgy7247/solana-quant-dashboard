@@ -232,7 +232,7 @@
   <!-- HERO -->
   <div class="grid hero">
     <div class="card">
-      <div class="label">총 평가액 <span style="color:var(--muted-2)">(USD)</span></div>
+      <div class="label">총 평가액 <span style="color:var(--muted-2)" id="totalUnit">USD</span></div>
       <div class="big" id="totalUsd">—</div>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
         <span class="subtxt mono" id="totalSol">— SOL</span>
@@ -434,6 +434,19 @@
     return fn(v, 6);
   }
   const shortMint = (m) => m ? m.slice(0, 4) + "…" + m.slice(-4) : "?";
+
+  function priceStr(usd) {
+    if (usd == null || !isFinite(usd)) return "시세 없음";
+    const c = S.currency;
+    if (c === "USD") return "$" + (usd >= 1 ? fn(usd, 2) : usd >= 0.01 ? fn(usd, 4) : fn(usd, 6));
+    if (c === "KRW") {
+      const v = usd * (S.krw || 0);
+      return "₩" + (v >= 100 ? fn(v, 0) : v >= 1 ? fn(v, 1) : fn(v, 2));
+    }
+    if (!S.solUsd) return "—";
+    const s = usd / S.solUsd;
+    return fn(s, s >= 0.01 ? 4 : 8) + " SOL";
+  }
 
   /* ---------- 통화 표시 (내부 계산은 SOL·USD 유지, 표시 시점에 변환) ---------- */
   function valueIn(v, base) {
@@ -985,6 +998,7 @@
     S._startSol = m.estStartSol;
 
     $("totalUsd").innerHTML = m.totalUsd != null ? curStr(m.totalUsd, "USD") : "—";
+    $("totalUnit").textContent = S.currency;
     $("totalSol").textContent = m.totalSol != null ? sol(m.totalSol, 4) + " SOL" : "—";
 
     const pnlPill = $("pnlPill");
@@ -1085,7 +1099,7 @@
           <div><div class="nm">${esc(r.symbol)}</div>
           <div class="mt">${esc(shortMint(r.mint))}</div></div></div></td>
         <td class="mono">${amt(r.amount)}</td>
-        <td>${r.priceUsd != null ? curStr(r.priceUsd, "USD") : "시세 없음"}
+        <td>${r.priceUsd != null ? priceStr(r.priceUsd) : "시세 없음"}
           ${r.change24 != null ? `<div class="subtxt" style="font-size:10.5px;color:var(--${r.change24 >= 0 ? "up" : "down"})">${pct(r.change24, 1)}</div>` : ""}</td>
         <td><strong>${r.usd != null ? curStr(r.usd, "USD") : "—"}</strong></td>
         <td class="mono">${r.entryPriceSol != null ? fn(r.entryPriceSol, 8) : "—"}</td>
