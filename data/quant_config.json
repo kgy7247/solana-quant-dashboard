@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "min_score": 72,
   "min_buy_ratio": 1.1,
   "min_liq_usd": 400000,
@@ -8,12 +8,12 @@
   "sol_crash_h1_pct": -2.5,
   "sizing_mode": "compounding_pct",
   "slot_pct": 0.30,
-  "slot_sol": 0.60,
+  "slot_sol": 0.61,
   "max_slots": 3,
   "auto_withdraw_usd": null,
-  "target_pct": 15.0,
+  "target_pct": 12.5,
   "trailing_activate_pct": 6.0,
-  "trailing_drop_pct": 3.0,
+  "trailing_drop_pct": 2.2,
   "stop_loss_pct": -5.0,
   "weights": {
     "ema_trend": 25,
