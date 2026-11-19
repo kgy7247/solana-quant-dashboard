@@ -365,6 +365,7 @@
     lastLive: null,
     lastStatic: null,
     lastTokens: null,
+    lastTokenTry: null,
     lastPrices: null,
     failStreak: 0,
     backoffUntil: 0,
@@ -1172,11 +1173,13 @@
     $("refreshBtn").classList.add("spin");
     try {
       const now = Date.now();
-      const needTokens = !S.tokens.length || !S.lastTokens || (now - S.lastTokens > 90000);
+      const lastTokenTry = Math.max(S.lastTokens || 0, S.lastTokenTry || 0);
+      const needTokens = !S.tokens.length || (now - lastTokenTry > 90000);
       const needPrices = !Object.keys(S.prices).length || !S.lastPrices || (now - S.lastPrices > 45000);
 
       let wallet = null;
       if (needTokens || !S.backoffUntil || now >= S.backoffUntil) {
+        if (needTokens) S.lastTokenTry = now;
         try { wallet = await fetchWallet(needTokens); } catch (e) { console.warn("지갑 조회 실패:", e.message); }
       }
 
@@ -1232,8 +1235,11 @@
         setStatus("err", "데이터 없음 · 재시도 중");
       }
 
-      $("diagLine").textContent = "RPC " + (rpcDiag || "—") +
-        " · 시세 " + Object.keys(S.prices).length + "종" + ((priceErr || !S.lastPrices) ? " (일부 실패)" : "");
+      const okHost = rpcBase ? hostOf(rpcBase) : "—";
+      $("diagLine").textContent = "RPC " + okHost +
+        ((wallet && wallet.tokenOk === false && S.tokens.length) ? " · 토큰 목록 직전값" : "") +
+        " · 시세 " + Object.keys(S.prices).length + "종";
+      $("diagLine").title = rpcDiag || "";
 
       renderHero();
       renderPositions();
