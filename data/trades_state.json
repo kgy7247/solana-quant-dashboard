@@ -1,5 +1,33 @@
 {
-  "positions": {},
+  "positions": {
+    "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump": {
+      "symbol": "pippin",
+      "entry_sol": 0.3969,
+      "entry_time": 1795139320.5597556,
+      "buy_sig": "4LRbtzutem5mJDsMPZhxTefxkjDJ4zDqRiHtt5PGUvt3AzCsaLSRYBxRheFxXZrksSTD195L4hacKqHNefDMEWF8",
+      "quant_score": 72,
+      "reasons": [
+        "EMA9>21",
+        "BB_Breakout",
+        "RSI(65.1)",
+        "Flow(1.5x)",
+        "v7_PASS",
+        "rug_ok(38)"
+      ],
+      "token_amount": 1508.151323,
+      "entry_tokens": 1508.151323,
+      "token_amount_raw": 1508151323,
+      "decimals": 6,
+      "actual_sol_spent": 0.39839344,
+      "entry_price_sol": 0.0002641601,
+      "liquidity_usd": 3463596,
+      "vol24_usd": 3927841,
+      "price_impact_pct": 0.4474,
+      "confirmed": "finalized",
+      "slot": 471558716,
+      "strategy_version": "v7"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -175,6 +203,31 @@
       "tx_fee_sol": 5e-06,
       "note": "5분 감시 check.sh 셸 따옴표 버그로 청산 지연 → -9.3%에서 긴급 전량 시장가 청산 (Raydium CP, 토큰계정 자동 close)",
       "recorded_at": 1795122699.8515148
+    },
+    {
+      "action": "BUY",
+      "symbol": "pippin",
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "sol": 0.3969,
+      "sig": "4LRbtzutem5mJDsMPZhxTefxkjDJ4zDqRiHtt5PGUvt3AzCsaLSRYBxRheFxXZrksSTD195L4hacKqHNefDMEWF8",
+      "time": 1795139320.559759,
+      "quant_score": 72,
+      "reasons": [
+        "EMA9>21",
+        "BB_Breakout",
+        "RSI(65.1)",
+        "Flow(1.5x)",
+        "v7_PASS",
+        "rug_ok(38)"
+      ],
+      "token_amount": 1508.151323,
+      "actual_sol_spent": 0.39839344,
+      "entry_price_sol": 0.0002641601,
+      "price_impact_pct": 0.4474,
+      "liquidity_usd": 3463596,
+      "vol24_usd": 3927841,
+      "confirmed": "finalized",
+      "strategy_version": "v7"
     }
   ],
   "started_at": 1795093332.0777118
