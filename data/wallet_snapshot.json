@@ -1,18 +1,9 @@
 {
-  "generated_at": 1795139348,
+  "generated_at": 1795140523,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
-  "sol": 1.586230087,
-  "sol_usd": 72.87,
-  "tokens": [
-    {
-      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
-      "amount": 1508.151323,
-      "symbol": "pippin",
-      "usd_price": 0.01885,
-      "usd_value": 28.42865243855,
-      "change24": 9.4
-    }
-  ],
-  "total_usd": 144.01723887824,
+  "sol": 1.961286336,
+  "sol_usd": 71.66,
+  "tokens": [],
+  "total_usd": 140.54577883776,
   "errors": []
 }

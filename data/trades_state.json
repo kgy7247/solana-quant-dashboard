@@ -1,33 +1,5 @@
 {
-  "positions": {
-    "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump": {
-      "symbol": "pippin",
-      "entry_sol": 0.3969,
-      "entry_time": 1795139320.5597556,
-      "buy_sig": "4LRbtzutem5mJDsMPZhxTefxkjDJ4zDqRiHtt5PGUvt3AzCsaLSRYBxRheFxXZrksSTD195L4hacKqHNefDMEWF8",
-      "quant_score": 72,
-      "reasons": [
-        "EMA9>21",
-        "BB_Breakout",
-        "RSI(65.1)",
-        "Flow(1.5x)",
-        "v7_PASS",
-        "rug_ok(38)"
-      ],
-      "token_amount": 1508.151323,
-      "entry_tokens": 1508.151323,
-      "token_amount_raw": 1508151323,
-      "decimals": 6,
-      "actual_sol_spent": 0.39839344,
-      "entry_price_sol": 0.0002641601,
-      "liquidity_usd": 3463596,
-      "vol24_usd": 3927841,
-      "price_impact_pct": 0.4474,
-      "confirmed": "finalized",
-      "slot": 471558716,
-      "strategy_version": "v7"
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -228,6 +200,34 @@
       "vol24_usd": 3927841,
       "confirmed": "finalized",
       "strategy_version": "v7"
+    },
+    {
+      "action": "SELL",
+      "symbol": "pippin",
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "entry_sol": 0.3969,
+      "out_sol": 0.375061248,
+      "pnl_sol": -0.021661,
+      "pnl_pct": -5.46,
+      "sig": "2YqLXAYauN5mauQ2C5zBUgDDyqWkY4ixWoDutENRwwkNyJgrZuAb5wLe6KTNzMz1bCic4HHGdpBZcAw9qshSmnHe",
+      "time": 1795140501.0193524,
+      "actual_sol_spent": 0.39839344,
+      "gross_sol_received": 0.375061248,
+      "tx_fee_sol": 5e-06,
+      "net_sol_received": 0.375056248,
+      "pnl_sol_actual": -0.023337192,
+      "pnl_pct_actual": -5.86,
+      "pnl_usd": -1.68,
+      "sol_price_exit": 71.8,
+      "exit_reason": "stop_loss_-5.0pct",
+      "exit_type": "stop_loss",
+      "rule": "pnl_pct <= -5.0%",
+      "token_amount": 1508.151323,
+      "confirmed": "finalized",
+      "slot": 471564226,
+      "entry_sol_quote": 0.3969,
+      "pnl_sol_quote_based": -0.021839,
+      "recorded_at": 1795140513.989876
     }
   ],
   "started_at": 1795093332.0777118
