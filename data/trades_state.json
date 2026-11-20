@@ -1,5 +1,31 @@
 {
-  "positions": {},
+  "positions": {
+    "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump": {
+      "symbol": "pippin",
+      "entry_sol": 0.3923,
+      "entry_time": 1795154022.8991332,
+      "buy_sig": "2UkhUx2YkisgY6Zt2oZuS8xJafkSNjEsqr6qGXgCheG5QU1aJGz9A3qzn3rNkonRHQeFWTP7o4H21tg23TmuqH5R",
+      "token_amount": 1445.344881,
+      "entry_tokens": 1445.344881,
+      "actual_sol_spent": 0.392305,
+      "entry_price_sol": 0.0002714231,
+      "price_impact_pct": 0.0018,
+      "liquidity_usd": 3507587,
+      "vol24_usd": 4569086,
+      "strategy_version": "v7",
+      "confirmed": "finalized",
+      "slot": 471627072,
+      "block_time": "2026-11-20T05:53:39Z",
+      "quant_score": 80,
+      "reasons": [
+        "Vol1.83x+Buy6.75x",
+        "RSI(64.3)",
+        "EMA9>21",
+        "BB_Breakout",
+        "v7_PASS"
+      ]
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -228,7 +254,42 @@
       "entry_sol_quote": 0.3969,
       "pnl_sol_quote_based": -0.021839,
       "recorded_at": 1795140513.989876
+    },
+    {
+      "action": "BUY",
+      "symbol": "pippin",
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "sol": 0.3923,
+      "sig": "2UkhUx2YkisgY6Zt2oZuS8xJafkSNjEsqr6qGXgCheG5QU1aJGz9A3qzn3rNkonRHQeFWTP7o4H21tg23TmuqH5R",
+      "time": 1795154022.899137,
+      "token_amount": 1445.344881,
+      "entry_tokens": 1445.344881,
+      "actual_sol_spent": 0.392305,
+      "entry_price_sol": 0.0002714231,
+      "price_impact_pct": 0.0018,
+      "liquidity_usd": 3507587,
+      "vol24_usd": 4569086,
+      "strategy_version": "v7",
+      "confirmed": "finalized",
+      "slot": 471627072,
+      "block_time": "2026-11-20T05:53:39Z",
+      "quant_score": 80,
+      "reasons": [
+        "Vol1.83x+Buy6.75x",
+        "RSI(64.3)",
+        "EMA9>21",
+        "BB_Breakout",
+        "v7_PASS"
+      ]
     }
   ],
-  "started_at": 1795093332.0777118
+  "started_at": 1795093332.0777118,
+  "meta": {
+    "last_buy": {
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "symbol": "pippin",
+      "at": "2026-11-20T05:53:39Z",
+      "sig": "2UkhUx2YkisgY6Zt2oZuS8xJafkSNjEsqr6qGXgCheG5QU1aJGz9A3qzn3rNkonRHQeFWTP7o4H21tg23TmuqH5R"
+    }
+  }
 }
