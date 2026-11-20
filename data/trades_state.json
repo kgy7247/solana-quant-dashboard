@@ -1,31 +1,5 @@
 {
-  "positions": {
-    "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump": {
-      "symbol": "pippin",
-      "entry_sol": 0.3923,
-      "entry_time": 1795154022.8991332,
-      "buy_sig": "2UkhUx2YkisgY6Zt2oZuS8xJafkSNjEsqr6qGXgCheG5QU1aJGz9A3qzn3rNkonRHQeFWTP7o4H21tg23TmuqH5R",
-      "token_amount": 1445.344881,
-      "entry_tokens": 1445.344881,
-      "actual_sol_spent": 0.392305,
-      "entry_price_sol": 0.0002714231,
-      "price_impact_pct": 0.0018,
-      "liquidity_usd": 3507587,
-      "vol24_usd": 4569086,
-      "strategy_version": "v7",
-      "confirmed": "finalized",
-      "slot": 471627072,
-      "block_time": "2026-11-20T05:53:39Z",
-      "quant_score": 80,
-      "reasons": [
-        "Vol1.83x+Buy6.75x",
-        "RSI(64.3)",
-        "EMA9>21",
-        "BB_Breakout",
-        "v7_PASS"
-      ]
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -281,6 +255,34 @@
         "BB_Breakout",
         "v7_PASS"
       ]
+    },
+    {
+      "action": "SELL",
+      "symbol": "pippin",
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "entry_sol": 0.3923,
+      "out_sol": 0.37453,
+      "pnl_sol": -0.01777,
+      "pnl_pct": -4.53,
+      "sig": "5DcwaaQhFasTcey6xxt8yiKDuiFF1DE6sRbAGSxovzykuX2GDMyqeDs9knA4HLfPT4qvJNvUYhuijGoAiQGGiJ2",
+      "time": 1795162405.8554006,
+      "actual_sol_spent": 0.392305,
+      "gross_sol_received": 0.374529649,
+      "tx_fee_sol": 3.087e-05,
+      "net_sol_received": 0.374498779,
+      "pnl_sol_actual": -0.017806221,
+      "pnl_pct_actual": -4.54,
+      "pnl_usd": -1.29,
+      "sol_price_exit": 72.51,
+      "exit_reason": "stop_loss_-5.0pct",
+      "exit_type": "stop_loss",
+      "rule": "pnl_pct <= -5.0%",
+      "token_amount": 1445.344881,
+      "confirmed": "finalized",
+      "slot": 471666111,
+      "block_time": "2026-11-20T08:13:25Z",
+      "note": "pippin 2차 칼손절: 5분 감시 봇 stop_loss_-5.0pct 시그널(-5.49%) 즉시 전량 시장가 청산 (Jupiter, Raydium 경유)",
+      "recorded_at": 1795162405.8554006
     }
   ],
   "started_at": 1795093332.0777118,
@@ -290,6 +292,13 @@
       "symbol": "pippin",
       "at": "2026-11-20T05:53:39Z",
       "sig": "2UkhUx2YkisgY6Zt2oZuS8xJafkSNjEsqr6qGXgCheG5QU1aJGz9A3qzn3rNkonRHQeFWTP7o4H21tg23TmuqH5R"
+    },
+    "last_sell": {
+      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "symbol": "pippin",
+      "at": "2026-11-20T08:13:25Z",
+      "sig": "5DcwaaQhFasTcey6xxt8yiKDuiFF1DE6sRbAGSxovzykuX2GDMyqeDs9knAHLfPT4qvJNvUYhuijGoAiQGGiJ2",
+      "reason": "stop_loss_-5.0pct"
     }
   }
 }
