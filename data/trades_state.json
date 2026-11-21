@@ -387,7 +387,28 @@
       "pnl_sol": 0.017207,
       "pnl_pct": 4.42,
       "sig": "2TprXa3Cd6dkFSCaxMV69cb5xJS3HCftGquC2r4yqp17Xd4vucDo2NF1z5C1WxfD16zJZdTVbvBCLeK588DjfFHf",
-      "time": 1795295593.7864823
+      "time": 1795295593.7864823,
+      "actual_sol_spent": 0.390519306,
+      "gross_sol_received": 0.406207,
+      "tx_fee_sol": 1.4895e-05,
+      "net_sol_received": 0.406192105,
+      "pnl_sol_actual": 0.015672799,
+      "pnl_pct_actual": 4.01,
+      "pnl_usd": 1.11,
+      "sol_price_exit": 70.5,
+      "exit_price_sol": 0.000127963556,
+      "exit_price_usd": 0.009021,
+      "exit_reason": "trailing_stop_peak_7.55pct",
+      "exit_type": "trailing_stop",
+      "rule": "peak >= +6.0% and pnl_pct <= peak - 2.2%",
+      "peak_pct": 7.55,
+      "token_amount": 3174.39047,
+      "holding_min": 14.5,
+      "confirmed": "finalized",
+      "slot": 472285480,
+      "block_time": "2026-11-22T06:13:13Z",
+      "note": "v7 5분감시 trailing_stop 시그널(peak +7.55% → +4.49%, 고점 대비 -3.06%p)로 mihao 3차 보유분 전량 시장가 청산 (Jupiter)",
+      "recorded_at": 1795295733.012
     }
   ],
   "started_at": 1795093332.0777118,
@@ -399,11 +420,11 @@
       "sig": "2UkhUx2YkisgY6Zt2oZuS8xJafkSNjEsqr6qGXgCheG5QU1aJGz9A3qzn3rNkonRHQeFWTP7o4H21tg23TmuqH5R"
     },
     "last_sell": {
-      "mint": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
-      "symbol": "pippin",
-      "at": "2026-11-20T08:13:25Z",
-      "sig": "5DcwaaQhFasTcey6xxt8yiKDuiFF1DE6sRbAGSxovzykuX2GDMyqeDs9knAHLfPT4qvJNvUYhuijGoAiQGGiJ2",
-      "reason": "stop_loss_-5.0pct"
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "symbol": "mihao",
+      "at": "2026-11-22T06:13:13Z",
+      "sig": "2TprXa3Cd6dkFSCaxMV69cb5xJS3HCftGquC2r4yqp17Xd4vucDo2NF1z5C1WxfD16zJZdTVbvBCLeK588DjfFHf",
+      "reason": "trailing_stop_peak_7.55pct"
     }
   }
 }
