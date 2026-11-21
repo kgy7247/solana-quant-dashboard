@@ -4,7 +4,12 @@
       "symbol": "mihao",
       "entry_sol": 0.389,
       "entry_time": 1795294723.2191453,
-      "buy_sig": "2jdhU46fMqcobor6eXAYLFCHd6vsZKZxajH7i4yUr2QgvR2gUCfvGR4pyo8cvxYGiVjPjh5xdTg2fCqdtsxHaqpY"
+      "buy_sig": "2jdhU46fMqcobor6eXAYLFCHd6vsZKZxajH7i4yUr2QgvR2gUCfvGR4pyo8cvxYGiVjPjh5xdTg2fCqdtsxHaqpY",
+      "entry_sol_actual": 0.390519306,
+      "entry_price_sol": 0.000123020102,
+      "entry_price_usd": 0.008659385,
+      "token_amount": 3174.39047,
+      "score": 80
     }
   },
   "history": [
@@ -370,7 +375,20 @@
       "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
       "sol": 0.389,
       "sig": "2jdhU46fMqcobor6eXAYLFCHd6vsZKZxajH7i4yUr2QgvR2gUCfvGR4pyo8cvxYGiVjPjh5xdTg2fCqdtsxHaqpY",
-      "time": 1795294723.2191484
+      "time": 1795294723.2191484,
+      "actual_sol_spent": 0.390519306,
+      "gross_sol_swapped": 0.389,
+      "tx_fee_sol": 5.466e-06,
+      "net_sol_swapped": 0.39051384,
+      "token_amount": 3174.39047,
+      "entry_price_sol": 0.000123020102,
+      "entry_price_usd": 0.008659385,
+      "sol_price_entry": 70.39,
+      "confirmed": "finalized",
+      "slot": 472281393,
+      "block_time": "2026-11-21T21:58:39Z",
+      "note": "v7 5분감시 시그널 score 80 (EMA9>21, BB_Breakout, RSI62, Vol2.8x+Buy1.4x, v7_PASS, rug_ok) → 0.389 SOL 시장가 매수, Jupiter(Meteora DLMM), 슬리피지 150bps",
+      "recorded_at": 1795294766
     }
   ],
   "started_at": 1795093332.0777118,
