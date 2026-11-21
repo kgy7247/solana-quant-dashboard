@@ -1,17 +1,5 @@
 {
-  "positions": {
-    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
-      "symbol": "mihao",
-      "entry_sol": 0.389,
-      "entry_time": 1795294723.2191453,
-      "buy_sig": "2jdhU46fMqcobor6eXAYLFCHd6vsZKZxajH7i4yUr2QgvR2gUCfvGR4pyo8cvxYGiVjPjh5xdTg2fCqdtsxHaqpY",
-      "entry_sol_actual": 0.390519306,
-      "entry_price_sol": 0.000123020102,
-      "entry_price_usd": 0.008659385,
-      "token_amount": 3174.39047,
-      "score": 80
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -389,6 +377,17 @@
       "block_time": "2026-11-21T21:58:39Z",
       "note": "v7 5분감시 시그널 score 80 (EMA9>21, BB_Breakout, RSI62, Vol2.8x+Buy1.4x, v7_PASS, rug_ok) → 0.389 SOL 시장가 매수, Jupiter(Meteora DLMM), 슬리피지 150bps",
       "recorded_at": 1795294766
+    },
+    {
+      "action": "SELL",
+      "symbol": "mihao",
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "entry_sol": 0.389,
+      "out_sol": 0.406207,
+      "pnl_sol": 0.017207,
+      "pnl_pct": 4.42,
+      "sig": "2TprXa3Cd6dkFSCaxMV69cb5xJS3HCftGquC2r4yqp17Xd4vucDo2NF1z5C1WxfD16zJZdTVbvBCLeK588DjfFHf",
+      "time": 1795295593.7864823
     }
   ],
   "started_at": 1795093332.0777118,
