@@ -1,12 +1,5 @@
 {
-  "positions": {
-    "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM": {
-      "symbol": "CLAUDIA",
-      "entry_sol": 0.3887,
-      "entry_time": 1795270756.9329746,
-      "buy_sig": "2kAjMSDnimPba1VkkfXY7ZZ4nXfXKxL1oWTXMfAQSYQ4g55DhC648PoVFdN9wPaenYRnn6m5PdMGuTRx3T7VJdwM"
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -298,6 +291,17 @@
       "sol": 0.3887,
       "sig": "2kAjMSDnimPba1VkkfXY7ZZ4nXfXKxL1oWTXMfAQSYQ4g55DhC648PoVFdN9wPaenYRnn6m5PdMGuTRx3T7VJdwM",
       "time": 1795270756.932978
+    },
+    {
+      "action": "SELL",
+      "symbol": "CLAUDIA",
+      "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
+      "entry_sol": 0.3887,
+      "out_sol": 0.363793,
+      "pnl_sol": -0.024907,
+      "pnl_pct": -6.41,
+      "sig": "65oJj1iC6mLeQkwZs2Yne3xBV6jdKmBwDCfZNiCwKhvNvwW6HrmVsFWeLmNAbHAR9zFgeZ7cFP9eB5SQUXx7qBds",
+      "time": 1795271304.093858
     }
   ],
   "started_at": 1795093332.0777118,
