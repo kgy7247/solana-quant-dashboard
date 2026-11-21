@@ -1,5 +1,12 @@
 {
-  "positions": {},
+  "positions": {
+    "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM": {
+      "symbol": "CLAUDIA",
+      "entry_sol": 0.3834,
+      "entry_time": 1795273109.0746949,
+      "buy_sig": "5wXUCq8rSwBpEK1LWZhYJT6LzXjvUv4G3SZin3iZMcbMcjhxVPrZKtfk53Pgt91Sd1aEjD9JLVsm5bSZ74yroqQG"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -319,6 +326,14 @@
       "block_time": "2026-11-21T14:28:24Z",
       "note": "CLAUDIA 칼손절: 5분 감시 봇 stop_loss_-5.0pct 시그널(-6.8%) 즉시 전량 시장가 청산 (Jupiter)",
       "recorded_at": 1795271304.093858
+    },
+    {
+      "action": "BUY",
+      "symbol": "CLAUDIA",
+      "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
+      "sol": 0.3834,
+      "sig": "5wXUCq8rSwBpEK1LWZhYJT6LzXjvUv4G3SZin3iZMcbMcjhxVPrZKtfk53Pgt91Sd1aEjD9JLVsm5bSZ74yroqQG",
+      "time": 1795273109.0746982
     }
   ],
   "started_at": 1795093332.0777118,
