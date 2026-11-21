@@ -1,18 +1,9 @@
 {
-  "generated_at": 1795275405,
+  "generated_at": 1795276407,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
-  "sol": 1.53362603,
-  "sol_usd": 70.32,
-  "tokens": [
-    {
-      "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
-      "amount": 3533.749989,
-      "symbol": "CLAUDIA",
-      "usd_price": 0.007798,
-      "usd_value": 27.556182414222,
-      "change24": 61.12
-    }
-  ],
-  "total_usd": 135.40076484382197,
+  "sol": 1.945246917,
+  "sol_usd": 70.27,
+  "tokens": [],
+  "total_usd": 136.69250085758998,
   "errors": []
 }
