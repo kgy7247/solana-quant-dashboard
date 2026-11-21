@@ -1,5 +1,12 @@
 {
-  "positions": {},
+  "positions": {
+    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
+      "symbol": "mihao",
+      "entry_sol": 0.389,
+      "entry_time": 1795294723.2191453,
+      "buy_sig": "2jdhU46fMqcobor6eXAYLFCHd6vsZKZxajH7i4yUr2QgvR2gUCfvGR4pyo8cvxYGiVjPjh5xdTg2fCqdtsxHaqpY"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -356,6 +363,14 @@
       "block_time": "2026-11-21T15:53:15Z",
       "note": "CLAUDIA 2차 트레일링 익절: 고점 +12.0% 대비 -4.6%p 반납(+7.36%)에 5분 감시 봇 trailing_stop 시그널로 전량 시장가 청산 (Jupiter)",
       "recorded_at": 1795276475.305116
+    },
+    {
+      "action": "BUY",
+      "symbol": "mihao",
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "sol": 0.389,
+      "sig": "2jdhU46fMqcobor6eXAYLFCHd6vsZKZxajH7i4yUr2QgvR2gUCfvGR4pyo8cvxYGiVjPjh5xdTg2fCqdtsxHaqpY",
+      "time": 1795294723.2191484
     }
   ],
   "started_at": 1795093332.0777118,
