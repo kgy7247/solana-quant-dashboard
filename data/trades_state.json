@@ -1,12 +1,5 @@
 {
-  "positions": {
-    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
-      "symbol": "mihao",
-      "entry_sol": 0.4006,
-      "entry_time": 1795327424.262123,
-      "buy_sig": "2uPc79U2oBctCZ8XHJmPhjoPPHp8ypgrygtU8sazUThJufkpmNf8BCznrcCTr7NbzL3ZvDRFeQZnTsCXo4qb8RfG"
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -550,6 +543,17 @@
       "sol": 0.4006,
       "sig": "2uPc79U2oBctCZ8XHJmPhjoPPHp8ypgrygtU8sazUThJufkpmNf8BCznrcCTr7NbzL3ZvDRFeQZnTsCXo4qb8RfG",
       "time": 1795327424.2621257
+    },
+    {
+      "action": "SELL",
+      "symbol": "mihao",
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "entry_sol": 0.4006,
+      "out_sol": 0.380337,
+      "pnl_sol": -0.020263,
+      "pnl_pct": -5.06,
+      "sig": "3d4V1H7ZMKUsaQPTU7tUNw3wnKhSMGPDGftHjEoEEnxVmWpefZMSFvuKUz6U8KokNLHRS2yVsVhWkXxC9muT31ae",
+      "time": 1795337328.7611651
     }
   ],
   "started_at": 1795093332.0777118,
