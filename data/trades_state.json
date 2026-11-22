@@ -1,5 +1,12 @@
 {
-  "positions": {},
+  "positions": {
+    "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn": {
+      "symbol": "PUMP",
+      "entry_sol": 0.3966,
+      "entry_time": 1795341535.4661784,
+      "buy_sig": "3NHu2brkXVZXpabjgJzBmHzBDKPaPSp72GTS8TuoHqQ8isa8Gu8v3ayBFo5YZ1BpRg912ZdrQbJUR3yLfvcsFras"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -554,6 +561,14 @@
       "pnl_pct": -5.06,
       "sig": "3d4V1H7ZMKUsaQPTU7tUNw3wnKhSMGPDGftHjEoEEnxVmWpefZMSFvuKUz6U8KokNLHRS2yVsVhWkXxC9muT31ae",
       "time": 1795337328.7611651
+    },
+    {
+      "action": "BUY",
+      "symbol": "PUMP",
+      "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "sol": 0.3966,
+      "sig": "3NHu2brkXVZXpabjgJzBmHzBDKPaPSp72GTS8TuoHqQ8isa8Gu8v3ayBFo5YZ1BpRg912ZdrQbJUR3yLfvcsFras",
+      "time": 1795341535.466182
     }
   ],
   "started_at": 1795093332.0777118,
