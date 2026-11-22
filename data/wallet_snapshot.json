@@ -1,18 +1,18 @@
 {
-  "generated_at": 1795314140,
+  "generated_at": 1795318580,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
-  "sol": 1.567200281,
-  "sol_usd": 69.93,
+  "sol": 1.567203522,
+  "sol_usd": 69.18,
   "tokens": [
     {
       "mint": "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump",
       "amount": 1463.300328,
       "symbol": "CATE",
-      "usd_price": 0.01872,
-      "usd_value": 27.39298214016,
-      "change24": 15.13
+      "usd_price": 0.01987,
+      "usd_value": 29.07577751736,
+      "change24": 24.68
     }
   ],
-  "total_usd": 136.98729779049,
+  "total_usd": 137.49491716932002,
   "errors": []
 }
