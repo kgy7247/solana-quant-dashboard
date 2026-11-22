@@ -1,5 +1,36 @@
 {
-  "positions": {},
+  "positions": {
+    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
+      "symbol": "mihao",
+      "entry_sol": 0.3969,
+      "entry_time": 1795322608.7684057,
+      "buy_sig": "4dQUWp389G7sE3mzaYtznrzhTHHKNXSRCRuEu8YtdRX13h5R8gVPF3ZRhADCxxcEncyEJQ75vtzPecuYjrNupJCi",
+      "entry_tokens": 3053.713362,
+      "token_amount": 3053.713362,
+      "entry_price_sol": 0.00012997462,
+      "entry_price_usd": 0.009017639,
+      "actual_sol_spent": 0.396905235,
+      "pool_sol_spent": 0.3969,
+      "tx_fee_sol": 5.235e-06,
+      "ata_rent_sol": 0.0,
+      "entry_usd": 27.5373,
+      "score": 72,
+      "score_tag": "v7_PASS",
+      "signal": {
+        "ema": "EMA9>21",
+        "bb": "BB_Breakout",
+        "rsi": 63.1,
+        "vol_ratio": 1.47,
+        "buy_sell_ratio": 1.57,
+        "liq_usd": 355000
+      },
+      "confirmed": "finalized",
+      "slot": 472411061,
+      "block_time": "2026-11-22T04:43:24Z",
+      "note": "v7 5분감시 72점(v7_PASS) 돌파 시그널로 mihao 신규 진입 (Jupiter 스왑, 슬리피지 1.5% 상한, ATA 기존 보유로 렌트 없음)",
+      "recorded_at": 1795322622
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -474,6 +505,36 @@
       "block_time": "2026-11-22T03:43:44Z",
       "note": "CATE 트레일링 익절 전량 청산: 고점 +8.71% 대비 -2.32%p 반납(+6.39%)에 5분 감시 봇 trailing_stop 시그널로 전량 시장가 매도 (Jupiter)",
       "recorded_at": 1795319046.7584653
+    },
+    {
+      "action": "BUY",
+      "symbol": "mihao",
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "sol": 0.3969,
+      "sig": "4dQUWp389G7sE3mzaYtznrzhTHHKNXSRCRuEu8YtdRX13h5R8gVPF3ZRhADCxxcEncyEJQ75vtzPecuYjrNupJCi",
+      "time": 1795322608.768409,
+      "entry_tokens": 3053.713362,
+      "token_amount": 3053.713362,
+      "entry_price_sol": 0.00012997462,
+      "entry_price_usd": 0.009017639,
+      "actual_sol_spent": 0.396905235,
+      "pool_sol_spent": 0.3969,
+      "tx_fee_sol": 5.235e-06,
+      "entry_usd": 27.5373,
+      "score": 72,
+      "score_tag": "v7_PASS",
+      "signal": {
+        "ema": "EMA9>21",
+        "bb": "BB_Breakout",
+        "rsi": 63.1,
+        "vol_ratio": 1.47,
+        "buy_sell_ratio": 1.57,
+        "liq_usd": 355000
+      },
+      "confirmed": "finalized",
+      "slot": 472411061,
+      "block_time": "2026-11-22T04:43:24Z",
+      "recorded_at": 1795322622
     }
   ],
   "started_at": 1795093332.0777118,
