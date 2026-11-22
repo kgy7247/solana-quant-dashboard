@@ -1,20 +1,5 @@
 {
-  "positions": {
-    "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump": {
-      "symbol": "CATE",
-      "entry_sol": 0.3922,
-      "entry_time": 1795313987.3095477,
-      "buy_sig": "3bxhfzABjomEHDKoTkhQjNNGxQMPFTx4yH3CVWZqZn6DWmQMf6DqApNoH62Bv6DpKBuVvEK5u8zN3gL1hAtKV1e1",
-      "entry_tokens": 1463.300328,
-      "token_amount": 1463.300328,
-      "entry_price_sol": 0.000268024268,
-      "entry_price_usd": 0.01877322,
-      "actual_sol_spent": 0.393719437,
-      "confirmed": "finalized",
-      "slot": 472371021,
-      "block_time": "2026-11-22T02:19:43Z"
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -457,6 +442,38 @@
       "block_time": "2026-11-22T02:19:43Z",
       "note": "v7 5분감시 100점(v7_PASS) 돌파 시그널로 CATE 신규 진입 (Jupiter 스왑, 슬리피지 1.5% 상한)",
       "recorded_at": 1795314054
+    },
+    {
+      "action": "SELL",
+      "symbol": "CATE",
+      "mint": "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump",
+      "entry_sol": 0.3922,
+      "out_sol": 0.417253,
+      "pnl_sol": 0.025053,
+      "pnl_pct": 6.39,
+      "sig": "3tKukPsmF65oNn3jsSC89ayPSiv1XnijRUPAifNBsD3hePUucAyxaEwzcV7KevGXJmYVuLwvzzj3dfHy7XLgXsLk",
+      "time": 1795319024.4888875,
+      "actual_sol_spent": 0.393719437,
+      "gross_sol_received": 0.417252674,
+      "tx_fee_sol": 5.203e-06,
+      "net_sol_received": 0.417247471,
+      "pnl_sol_actual": 0.023528034,
+      "pnl_pct_actual": 5.98,
+      "pnl_usd": 1.63,
+      "sol_price_exit": 69.22,
+      "exit_price_sol": 0.000285144933,
+      "exit_price_usd": 0.019738,
+      "exit_reason": "trailing_stop_peak_8.71pct",
+      "exit_type": "trailing_stop",
+      "rule": "peak >= +6.0% and pnl_pct <= peak - 2.2%",
+      "peak_pct": 8.71,
+      "token_amount": 1463.300328,
+      "holding_min": 84.3,
+      "confirmed": "finalized",
+      "slot": 472394430,
+      "block_time": "2026-11-22T03:43:44Z",
+      "note": "CATE 트레일링 익절 전량 청산: 고점 +8.71% 대비 -2.32%p 반납(+6.39%)에 5분 감시 봇 trailing_stop 시그널로 전량 시장가 매도 (Jupiter)",
+      "recorded_at": 1795319046.7584653
     }
   ],
   "started_at": 1795093332.0777118,
@@ -474,5 +491,6 @@
       "sig": "2TprXa3Cd6dkFSCaxMV69cb5xJS3HCftGquC2r4yqp17Xd4vucDo2NF1z5C1WxfD16zJZdTVbvBCLeK588DjfFHf",
       "reason": "trailing_stop_peak_7.55pct"
     }
-  }
+  },
+  "total_realized_pnl_sol": 0.041216
 }
