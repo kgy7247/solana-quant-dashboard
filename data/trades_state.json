@@ -5,6 +5,12 @@
       "entry_sol": 0.3966,
       "entry_time": 1795341535.4661784,
       "buy_sig": "3NHu2brkXVZXpabjgJzBmHzBDKPaPSp72GTS8TuoHqQ8isa8Gu8v3ayBFo5YZ1BpRg912ZdrQbJUR3yLfvcsFras"
+    },
+    "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN": {
+      "symbol": "JUP",
+      "entry_sol": 0.397,
+      "entry_time": 1795344825.9251676,
+      "buy_sig": "5meuVTUtPCnzW8P4i8jp4vzFVu3jQMeTiRcfUajfNKFWWCk6UEHmryUxFctwP9bU2UmUztSWFUV8WSar54eFCzCC"
     }
   },
   "history": [
@@ -569,6 +575,14 @@
       "sol": 0.3966,
       "sig": "3NHu2brkXVZXpabjgJzBmHzBDKPaPSp72GTS8TuoHqQ8isa8Gu8v3ayBFo5YZ1BpRg912ZdrQbJUR3yLfvcsFras",
       "time": 1795341535.466182
+    },
+    {
+      "action": "BUY",
+      "symbol": "JUP",
+      "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "sol": 0.397,
+      "sig": "5meuVTUtPCnzW8P4i8jp4vzFVu3jQMeTiRcfUajfNKFWWCk6UEHmryUxFctwP9bU2UmUztSWFUV8WSar54eFCzCC",
+      "time": 1795344825.925171
     }
   ],
   "started_at": 1795093332.0777118,
