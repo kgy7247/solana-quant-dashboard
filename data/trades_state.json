@@ -1,5 +1,20 @@
 {
-  "positions": {},
+  "positions": {
+    "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump": {
+      "symbol": "CATE",
+      "entry_sol": 0.3922,
+      "entry_time": 1795313987.3095477,
+      "buy_sig": "3bxhfzABjomEHDKoTkhQjNNGxQMPFTx4yH3CVWZqZn6DWmQMf6DqApNoH62Bv6DpKBuVvEK5u8zN3gL1hAtKV1e1",
+      "entry_tokens": 1463.300328,
+      "token_amount": 1463.300328,
+      "entry_price_sol": 0.000268024268,
+      "entry_price_usd": 0.01877322,
+      "actual_sol_spent": 0.393719437,
+      "confirmed": "finalized",
+      "slot": 472371021,
+      "block_time": "2026-11-22T02:19:43Z"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -409,6 +424,39 @@
       "block_time": "2026-11-21T21:13:13Z",
       "note": "v7 5분감시 trailing_stop 시그널(peak +7.55% → +4.49%, 고점 대비 -3.06%p)로 mihao 3차 보유분 전량 시장가 청산 (Jupiter)",
       "recorded_at": 1795295733.012
+    },
+    {
+      "action": "BUY",
+      "symbol": "CATE",
+      "mint": "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump",
+      "sol": 0.3922,
+      "sig": "3bxhfzABjomEHDKoTkhQjNNGxQMPFTx4yH3CVWZqZn6DWmQMf6DqApNoH62Bv6DpKBuVvEK5u8zN3gL1hAtKV1e1",
+      "time": 1795313987.309551,
+      "entry_tokens": 1463.300328,
+      "token_amount": 1463.300328,
+      "entry_price_sol": 0.000268024268,
+      "entry_price_usd": 0.01877322,
+      "actual_sol_spent": 0.393719437,
+      "pool_sol_spent": 0.3922,
+      "tx_fee_sol": 5.597e-06,
+      "ata_rent_sol": 0.00151384,
+      "entry_usd": 27.5773,
+      "score": 100,
+      "score_tag": "v7_PASS",
+      "signal": {
+        "ema": "EMA9>21",
+        "bb": "BB_Breakout",
+        "donchian": "Donchian20_High",
+        "rsi": 67.2,
+        "vol_ratio": 3.74,
+        "buy_sell_ratio": 5.96,
+        "liq_usd": 1325327
+      },
+      "confirmed": "finalized",
+      "slot": 472371021,
+      "block_time": "2026-11-22T02:19:43Z",
+      "note": "v7 5분감시 100점(v7_PASS) 돌파 시그널로 CATE 신규 진입 (Jupiter 스왑, 슬리피지 1.5% 상한)",
+      "recorded_at": 1795314054
     }
   ],
   "started_at": 1795093332.0777118,
