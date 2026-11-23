@@ -1,18 +1,18 @@
 {
-  "generated_at": 1795395157,
+  "generated_at": 1795404978,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
-  "sol": 1.601516406,
-  "sol_usd": 70.51,
+  "sol": 1.601516407,
+  "sol_usd": 71.55,
   "tokens": [
     {
       "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
       "amount": 125.283441,
       "symbol": "JUP",
-      "usd_price": 0.223,
-      "usd_value": 27.938207343,
-      "change24": 2.33
+      "usd_price": 0.23258958171829863,
+      "usd_value": 29.139623138419143,
+      "change24": 1062691
     }
   ],
-  "total_usd": 140.86112913006,
+  "total_usd": 143.72812205926914,
   "errors": []
 }
