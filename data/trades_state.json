@@ -1,11 +1,5 @@
 {
   "positions": {
-    "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn": {
-      "symbol": "PUMP",
-      "entry_sol": 0.3966,
-      "entry_time": 1795341535.4661784,
-      "buy_sig": "3NHu2brkXVZXpabjgJzBmHzBDKPaPSp72GTS8TuoHqQ8isa8Gu8v3ayBFo5YZ1BpRg912ZdrQbJUR3yLfvcsFras"
-    },
     "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN": {
       "symbol": "JUP",
       "entry_sol": 0.397,
@@ -583,6 +577,36 @@
       "sol": 0.397,
       "sig": "5meuVTUtPCnzW8P4i8jp4vzFVu3jQMeTiRcfUajfNKFWWCk6UEHmryUxFctwP9bU2UmUztSWFUV8WSar54eFCzCC",
       "time": 1795344825.925171
+    },
+    {
+      "action": "SELL",
+      "symbol": "PUMP",
+      "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "entry_sol": 0.3966,
+      "out_sol": 0.415495,
+      "pnl_sol": 0.018895,
+      "pnl_pct": 4.76,
+      "sig": "2vS9FwxcpMBTdE7MNxtJJ7avESaoNXzgpA22Mo4skoDHuXuDAbA9yQk7krG22GFgE9wKdBxT8sa48rBRQeYS4Had",
+      "time": 1795395119.8494785,
+      "actual_sol_spent": 0.39814424,
+      "gross_sol_received": 0.415495,
+      "tx_fee_sol": 0.000105,
+      "net_sol_received": 0.415374973,
+      "pnl_sol_actual": 0.017230733,
+      "pnl_pct_actual": 4.33,
+      "pnl_usd": 1.22,
+      "sol_price_exit": 70.56,
+      "exit_price_sol": 3.6293237e-05,
+      "exit_price_usd": 0.0025609,
+      "exit_reason": "trailing_stop_peak_6.72pct",
+      "exit_type": "trailing_stop",
+      "rule": "peak >= +4.5% and pnl_pct <= peak - 1.8%p",
+      "peak_pct": 6.72,
+      "token_amount": 11444.969099,
+      "confirmed": "finalized",
+      "slot": 472748345,
+      "block_time": "2026-11-23T00:51:59Z",
+      "note": "PUMP v8 트레일링 익절 전량 청산: 고점 +6.72% 대비 -1.99%p 반납(+4.73%)에 5분 감시 봇 trailing_stop 시그널로 전량 시장가 매도(Jupiter). 실지출 0.398144240 SOL 대비 순수령 0.415374973 SOL → +4.33%"
     }
   ],
   "started_at": 1795093332.0777118,
@@ -594,12 +618,12 @@
       "sig": "2UkhUx2YkisgY6Zt2oZuS8xJafkSNjEsqr6qGXgCheG5QU1aJGz9A3qzn3rNkonRHQeFWTP7o4H21tg23TmuqH5R"
     },
     "last_sell": {
-      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
-      "symbol": "mihao",
-      "at": "2026-11-22T05:28:28Z",
-      "sig": "3m13sWi9VozzDicVCYX7Mh79sjRK8hFmZwhLQftb4dhojjKGy2LDDfsdiJpxSKuQ1aJY1uULdpgK9ereeohfKETZ",
-      "reason": "trailing_stop_peak_7.64pct"
+      "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "symbol": "PUMP",
+      "at": "2026-11-23T00:51:59Z",
+      "sig": "2vS9FwxcpMBTdE7MNxtJJ7avESaoNXzgpA22Mo4skoDHuXuDAbA9yQk7krG22GFgE9wKdBxT8sa48rBRQeYS4Had",
+      "reason": "trailing_stop_peak_6.72pct"
     }
   },
-  "total_realized_pnl_sol": 0.059818
+  "total_realized_pnl_sol": 0.077048733
 }
