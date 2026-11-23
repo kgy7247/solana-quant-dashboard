@@ -1,12 +1,5 @@
 {
-  "positions": {
-    "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN": {
-      "symbol": "JUP",
-      "entry_sol": 0.397,
-      "entry_time": 1795344825.9251676,
-      "buy_sig": "5meuVTUtPCnzW8P4i8jp4vzFVu3jQMeTiRcfUajfNKFWWCk6UEHmryUxFctwP9bU2UmUztSWFUV8WSar54eFCzCC"
-    }
-  },
+  "positions": {},
   "history": [
     {
       "action": "BUY",
@@ -607,6 +600,46 @@
       "slot": 472748345,
       "block_time": "2026-11-23T00:51:59Z",
       "note": "PUMP v8 트레일링 익절 전량 청산: 고점 +6.72% 대비 -1.99%p 반납(+4.73%)에 5분 감시 봇 trailing_stop 시그널로 전량 시장가 매도(Jupiter). 실지출 0.398144240 SOL 대비 순수령 0.415374973 SOL → +4.33%"
+    },
+    {
+      "action": "SELL_FAILED",
+      "symbol": "JUP",
+      "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "entry_sol": 0.397,
+      "ata_rent_sol": 0.0,
+      "tx_fee_sol": 6.075e-06,
+      "wallet_delta_sol": -6.075e-06,
+      "pnl_basis": "swap_pure_sol",
+      "sig": "3YZCxuGKSSjd6aUgunYZD8R763vdN5aXjMmQ8w7iPP5HVmM6xzup96wuqXgpjmDQxSWCLjPher6AnodAu8R23VXf",
+      "time": 1795417211.2294602,
+      "error": "on-chain InstructionError [4, Custom 6001] SlippageToleranceExceeded — Jupiter 스왑 실패(수수료만 소모), 토큰 매도 안 됨",
+      "out_sol_unrealized_quote": 0.415555
+    },
+    {
+      "action": "SELL",
+      "symbol": "JUP",
+      "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "entry_sol": 0.397,
+      "out_sol": 0.414738645,
+      "out_sol_quote": 0.414738645,
+      "gross_sol_received": 0.414738645,
+      "pnl_sol": 0.017738645,
+      "pnl_pct": 4.47,
+      "pnl_sol_quote": 0.017738645,
+      "ata_rent_sol": 0.0,
+      "tx_fee_sol": 5e-06,
+      "net_sol_received": 0.414733645,
+      "wallet_delta_sol": 0.414733645,
+      "pnl_basis": "swap_pure_sol",
+      "sig": "5GMzykgaHdUTnCi9yiNGEVNURXgkF2uDCxoEELusRNjSyymHrguJMXNZ61RXrJcQ1BXFvoZHxUqnMFzV1ChGDenJ",
+      "time": 1795417252.5463443,
+      "token_amount": 125.283441,
+      "token_remaining_raw": 0,
+      "slot": 472851215,
+      "block_time": 1795417248,
+      "slippage_bps": 300,
+      "verified": "on-chain meta.err=None, token_remaining=0",
+      "attempts": []
     }
   ],
   "started_at": 1795093332.0777118,
