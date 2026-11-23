@@ -1008,7 +1008,7 @@
           }
         },
         scales: {
-          x: { ...baseOpts().scales.x, ticks: { color: TICK, font: { size: 10.5 }, maxRotation: 0, autoSkip: false } },
+          x: { ...baseOpts().scales.x, ticks: { color: TICK, font: { size: 10.5 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 6 } },
           y: {
             ...baseOpts().scales.y,
             ticks: { color: TICK, font: { size: 10.5 }, padding: 6, callback: (v) => (v > 0 ? "+" : "") + v + "%" }
