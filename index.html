@@ -264,10 +264,11 @@
       <div class="v" id="mix" style="font-size:17px">—</div>
     </div>
 
-    <div class="card stat">
-      <div class="label">누적 손익</div>
+    <div class="card stat" title="손익 = 회수 SOL(스왑) − 투입 SOL(스왑). ATA 토큰 계정 렌트 예치금과 tx 수수료는 손익에서 제외하고 따로 표기합니다." >
+      <div class="label">누적 손익 <span style="color:var(--muted-2);text-transform:none;letter-spacing:0">· 순수 스왑 SOL</span></div>
       <div class="v" id="pnlSol">—</div>
       <div class="subtxt" id="pnlSub">—</div>
+      <div class="subtxt" id="rentSub" style="font-size:10px;color:var(--muted-2);line-height:1.35">—</div>
       <div class="divider"></div>
       <div class="label">승률 · 포지션</div>
       <div class="v" id="winRate" style="font-size:17px">—</div>
@@ -301,12 +302,16 @@
         <thead>
           <tr>
             <th>토큰</th><th>수량</th><th>현재가</th><th>평가액</th>
-            <th>진입가 (SOL)</th><th>진입 대비</th><th>점수</th><th>링크</th>
+            <th title="스왑에 넣은 순수 SOL ÷ 보유 수량">진입가 (SOL)</th>
+            <th title="코인 가격만의 변동률 (SOL 기준). SOL 시세 변동은 제외">코인 수익률 (SOL)</th>
+            <th title="USD/KRW 평가액 변동률. 코인 가격 변동과 SOL 시세 변동이 모두 반영됩니다">총 평가액 변동 (USD/KRW)</th>
+            <th>점수</th><th>링크</th>
           </tr>
         </thead>
-        <tbody id="posBody"><tr><td colspan="8" class="empty">불러오는 중…</td></tr></tbody>
+        <tbody id="posBody"><tr><td colspan="9" class="empty">불러오는 중…</td></tr></tbody>
       </table>
     </div>
+    <div class="subtxt" id="posNote" style="margin-top:8px;font-size:11px;color:var(--muted-2)">—</div>
   </div>
 
   <!-- BAR + TIMELINE -->
@@ -328,13 +333,18 @@
       <table id="histTable">
         <thead>
           <tr>
-            <th>시각</th><th>토큰</th><th>구분</th><th>투입 SOL</th><th>회수 SOL</th>
-            <th>손익</th><th>손익 %</th><th>트랜잭션</th>
+            <th>시각</th><th>토큰</th><th>구분</th>
+            <th title="스왑에 실제로 넣은 SOL (ATA 렌트 예치금·tx 수수료 제외)">투입 SOL<br><span style="font-weight:500;color:var(--muted-2);text-transform:none;letter-spacing:0">(스왑)</span></th>
+            <th title="스왑에서 받은 SOL (quote gross · tx 수수료 제외)">회수 SOL<br><span style="font-weight:500;color:var(--muted-2);text-transform:none;letter-spacing:0">(스왑)</span></th>
+            <th title="회수 SOL(스왑) − 투입 SOL(스왑). ATA 렌트·수수료는 제외">손익 (SOL)</th>
+            <th>손익 %<br><span style="font-weight:500;color:var(--muted-2);text-transform:none;letter-spacing:0">(스왑 기준)</span></th>
+            <th>트랜잭션</th>
           </tr>
         </thead>
         <tbody id="histBody"><tr><td colspan="8" class="empty">불러오는 중…</td></tr></tbody>
       </table>
     </div>
+    <div class="subtxt" id="histNote" style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.5">—</div>
   </div>
 
   <footer>
@@ -761,7 +771,9 @@
       pricedTokens++;
       if (solUsd) {
         const pos = positions[t.mint];
-        if (pos && pos.entry_sol) unrealSol += (usd / solUsd) - (pos.actual_sol_spent || pos.entry_sol);
+        // 회계 기준 통일: 미실현도 실현과 같은 '순수 스왑 SOL(entry_sol)' 기준.
+        // (actual_sol_spent = entry_sol + ATA 렌트 예치금 + tx 수수료 → 손익에서 제외)
+        if (pos && pos.entry_sol) unrealSol += (usd / solUsd) - pos.entry_sol;
       }
     }
     const solBalUsd = solUsd != null ? S.sol * solUsd : null;
@@ -773,29 +785,49 @@
     const wins = closed.filter((t) => (t.pnlPct || 0) > 0).length;
     const winRate = closed.length ? (wins / closed.length) * 100 : null;
 
+    // ATA 렌트 예치금·tx 수수료: 손익과 섞지 않고 따로 보고
+    let rentLockedSol = 0, rentReclaimedSol = 0, txFeeSol = 0;
+    for (const pos of Object.values(positions)) {
+      if (pos && isFinite(pos.ata_rent_sol)) rentLockedSol += Number(pos.ata_rent_sol);
+    }
+    for (const h of (S.state?.history || [])) {
+      if (!h) continue;
+      // SELL의 ata_rent_sol = 계정 소각으로 돌려받은 예치금
+      if (h.action === "SELL" && isFinite(h.ata_rent_sol)) rentReclaimedSol += Number(h.ata_rent_sol);
+      if (isFinite(h.tx_fee_sol)) txFeeSol += Number(h.tx_fee_sol);
+    }
+
     return {
       closed, realizedSol, unrealSol, totalPnlSol,
       solUsd, solBalUsd, tokenUsd, totalUsd, totalSol,
       estStartSol, winRate, wins, pricedTokens,
+      rentLockedSol, rentReclaimedSol, txFeeSol,
       openCount: Object.keys(positions).length
     };
   }
 
   function holdings() {
     const positions = S.state?.positions || {};
+    const meta = S.snapshot?.positions_meta || {};
     const rows = [];
     const seen = new Set();
     for (const t of S.tokens) {
       seen.add(t.mint);
       const pos = positions[t.mint] || null;
+      const pm = meta[t.mint] || null;
       const p = S.prices[t.mint] || null;
       const usd = p ? t.amount * p.usd : null;
       const entryTokens = pos ? (pos.entry_tokens || pos.token_amount || t.amount) : null;
-      const entrySolAmt = pos ? (pos.actual_sol_spent || pos.entry_sol) : null;
+      const entrySolAmt = pos ? pos.entry_sol : null;                    // 순수 스왑 SOL 기준
       const entryPriceSol = pos
         ? (pos.entry_price_sol || (entrySolAmt && entryTokens ? entrySolAmt / entryTokens : null))
         : null;
-      const curPriceSol = (p && S.prices[SOL_MINT]?.usd) ? p.usd / S.prices[SOL_MINT].usd : null;
+      const solUsdEntry = pos ? (pos.sol_price_entry ?? pm?.sol_usd_entry ?? null) : null;
+      const entryPriceUsd = pos
+        ? (pos.entry_price_usd ?? pm?.entry_price_usd ?? (entryPriceSol && solUsdEntry ? entryPriceSol * solUsdEntry : null))
+        : null;
+      const solUsdNow = S.prices[SOL_MINT]?.usd ?? null;
+      const curPriceSol = (p && solUsdNow) ? p.usd / solUsdNow : null;
       rows.push({
         mint: t.mint,
         symbol: pos?.symbol || p?.symbol || shortMint(t.mint),
@@ -806,7 +838,13 @@
         change24: p?.change24 ?? null,
         entryPriceSol,
         curPriceSol,
+        // 코인 가격 변동만(SOL 기준) — SOL 시세 변동 제외
         pnlPct: (entryPriceSol && curPriceSol) ? (curPriceSol / entryPriceSol - 1) * 100 : null,
+        // 총 평가액 변동(USD/KRW) — 코인 가격 + SOL 시세 변동 반영
+        valuePct: (entryPriceUsd && p && p.usd) ? (p.usd / entryPriceUsd - 1) * 100 : null,
+        solMovePct: (solUsdEntry && solUsdNow) ? (solUsdNow / solUsdEntry - 1) * 100 : null,
+        entryPriceUsd,
+        ataRentSol: pos ? (pos.ata_rent_sol ?? pm?.ata_rent_sol ?? null) : null,
         score: pos?.quant_score ?? null,
         reasons: pos?.reasons || null,
         entryTime: pos?.entry_time ?? null,
@@ -815,11 +853,15 @@
     }
     for (const [mint, pos] of Object.entries(positions)) {
       if (seen.has(mint)) continue;
+      const pm = meta[mint] || null;
       rows.push({
         mint, symbol: pos.symbol || shortMint(mint), name: null, amount: 0, usd: 0,
         priceUsd: S.prices[mint]?.usd ?? null, change24: null,
-        entryPriceSol: pos.entry_tokens ? pos.entry_sol / pos.entry_tokens : null,
-        curPriceSol: null, pnlPct: null, score: pos.quant_score ?? null,
+        entryPriceSol: pos.entry_price_sol || (pos.entry_tokens ? pos.entry_sol / pos.entry_tokens : null),
+        curPriceSol: null, pnlPct: null, valuePct: null, solMovePct: null,
+        entryPriceUsd: pos.entry_price_usd ?? pm?.entry_price_usd ?? null,
+        ataRentSol: pos.ata_rent_sol ?? pm?.ata_rent_sol ?? null,
+        score: pos.quant_score ?? null,
         reasons: pos.reasons || null, entryTime: pos.entry_time ?? null, missing: true
       });
     }
@@ -1027,6 +1069,7 @@
       const p = m.estStartSol ? (m.totalPnlSol / m.estStartSol) * 100 : null;
       pnlPill.className = "pill " + cls(m.totalPnlSol);
       pnlPill.textContent = `${curStr(m.totalPnlSol, "SOL", { signed: true })}${p != null ? " · " + pct(p) : ""}`;
+      pnlPill.title = `누적 손익(순수 스왑 SOL) · 초기 자본 추정 ${sol(m.estStartSol, 3)} SOL 대비 · ATA 렌트/수수료 제외`;
     }
 
     $("solBal").innerHTML = sol(S.sol, 4) + "<small>SOL</small>";
@@ -1047,6 +1090,7 @@
       ? `<span style="color:var(--${m.totalPnlSol >= 0 ? "up" : "down"})">${curStr(m.totalPnlSol, "SOL", { signed: true })}</span>`
       : "—";
     $("pnlSub").textContent = `실현 ${curStr(m.realizedSol, "SOL", { signed: true })} · 미실현 ${curStr(m.unrealSol, "SOL", { signed: true })}`;
+    $("rentSub").textContent = `ATA 렌트 예치 ${sol(m.rentLockedSol || 0, 4)} SOL·회수 ${sol(m.rentReclaimedSol || 0, 4)} SOL · tx 수수료 ${sol(m.txFeeSol || 0, 4)} SOL (손익 제외)`;
 
     $("winRate").innerHTML = m.winRate != null
       ? `${fn(m.winRate, 0)}%<small style="color:var(--muted)"> · ${m.wins}/${m.closed.length} · ${m.openCount}슬롯</small>`
@@ -1107,13 +1151,15 @@
     const rows = holdings();
     const body = $("posBody");
     if (!rows.length) {
-      body.innerHTML = `<tr><td colspan="8" class="empty">보유 토큰 없음 · SOL 대기 중</td></tr>`;
+      body.innerHTML = `<tr><td colspan="9" class="empty">보유 토큰 없음 · SOL 대기 중</td></tr>`;
       $("posHint").textContent = "지갑 잔액 기준 · 15초 갱신";
+      $("posNote").textContent = "코인 수익률 = 코인 가격만의 변동(SOL 기준) · 총 평가액 변동 = 코인 가격 + SOL 시세 변동(USD/KRW 평가 기준)";
       return;
     }
     body.innerHTML = rows.map((r) => {
       const init = (r.symbol || "?").slice(0, 2).toUpperCase();
       const pnl = r.pnlPct;
+      const val = r.valuePct;
       const src = r.missing
         ? `<span class="tag warn">잔액 없음</span>`
         : (r.score != null ? `<span class="tag buy">${r.score}</span>` : `<span class="tag" style="background:rgba(255,255,255,.06);color:var(--muted)">보유</span>`);
@@ -1126,18 +1172,25 @@
           ${r.change24 != null ? `<div class="subtxt" style="font-size:10.5px;color:var(--${r.change24 >= 0 ? "up" : "down"})">${pct(r.change24, 1)}</div>` : ""}</td>
         <td><strong>${r.usd != null ? curStr(r.usd, "USD") : "—"}</strong></td>
         <td class="mono">${r.entryPriceSol != null ? fn(r.entryPriceSol, 8) : "—"}</td>
-        <td>${pnl != null ? `<span class="pill ${cls(pnl)}">${pct(pnl)}</span>` : "—"}</td>
+        <td title="코인 가격만의 변동률 (SOL 기준)">${pnl != null ? `<span class="pill ${cls(pnl)}">${pct(pnl)}</span>` : "—"}</td>
+        <td title="USD/KRW 평가액 변동률 (SOL 시세 변동 포함)">${val != null ? `<span class="pill ${cls(val)}">${pct(val)}</span>` : "—"}${r.solMovePct != null ? `<div class="subtxt" style="font-size:10.5px;color:var(--muted-2)">SOL ${pct(r.solMovePct, 1)} 포함</div>` : ""}</td>
         <td>${src}</td>
         <td><a class="sol" href="https://solscan.io/token/${encodeURIComponent(r.mint)}" target="_blank" rel="noopener">Solscan</a></td>
       </tr>`;
     }).join("");
+    const rentSum = rows.reduce((s, r) => s + (isFinite(r.ataRentSol) ? Number(r.ataRentSol) : 0), 0);
     $("posHint").textContent = `지갑 잔액 기준 · 15초 갱신 · ${rows.length}종`;
+    $("posNote").textContent = `코인 수익률 = 코인 가격만의 변동(SOL 기준) · 총 평가액 변동 = 코인 가격 + SOL 시세 변동(USD/KRW) · ATA 렌트 예치금 ${sol(rentSum, 4)} SOL은 되찾을 수 있는 예치금으로 평가액·손익에서 제외`;
   }
 
   function renderHistory() {
     const hist = (S.state?.history || []).slice().sort((a, b) => b.time - a.time);
     const body = $("histBody");
     if (!hist.length) { body.innerHTML = `<tr><td colspan="8" class="empty">거래 기록 없음</td></tr>`; return; }
+    const hm = metrics();
+    $("histNote").innerHTML = `회계 기준: 손익 = 회수 SOL(스왑) − 투입 SOL(스왑) · ` +
+      `ATA 렌트 예치금(보유 중 잠김 ${sol(hm.rentLockedSol || 0, 4)} SOL, 회수 ${sol(hm.rentReclaimedSol || 0, 4)} SOL)과 ` +
+      `tx 수수료(${sol(hm.txFeeSol || 0, 4)} SOL)는 손익에 섞지 않고 별도 집계합니다.`;
     const closedBySig = {};
     for (const t of closedTrades()) if (t.sig) closedBySig[t.sig] = t;
     body.innerHTML = hist.map((h) => {
@@ -1149,6 +1202,11 @@
       const rec = closedBySig[h.sig] || null;
       const pnlSol = h.pnl_sol ?? (rec ? rec.pnlSol : null);
       const pnlPct = h.pnl_pct ?? (rec ? rec.pnlPct : null);
+      const noteBits = [];
+      if (h.entry_sol != null && h.out_sol != null) noteBits.push(`스왑 ${fn(h.entry_sol, 4)} → ${fn(h.out_sol, 6)} SOL`);
+      if (h.ata_rent_sol != null) noteBits.push(`ATA 렌트 ${h.action === "SELL" ? "회수" : "예치"} ${fn(h.ata_rent_sol, 6)} SOL(별도)`);
+      if (h.tx_fee_sol != null) noteBits.push(`tx 수수료 ${fn(h.tx_fee_sol, 6)} SOL(별도)`);
+      const pnlTip = noteBits.length ? noteBits.join(" · ") : "";
       return `<tr>
         <td class="mono" style="color:var(--muted)">${fullTime(h.time)}</td>
         <td><div class="tk"><div class="avatar">${esc((h.symbol || "?").slice(0, 2).toUpperCase())}</div>
@@ -1156,7 +1214,7 @@
         <td>${tag}</td>
         <td class="mono">${h.sol != null ? fn(h.sol, 3) : (h.entry_sol != null ? fn(h.entry_sol, 3) : "—")}</td>
         <td class="mono">${h.out_sol != null ? fn(h.out_sol, 4) : "—"}</td>
-        <td class="mono" style="color:var(--${pnlSol == null ? "muted" : pnlSol >= 0 ? "up" : "down"})">${pnlSol != null ? curStr(pnlSol, "SOL", { signed: true, bare: true }) : "—"}</td>
+        <td class="mono" title="${esc(pnlTip)}" style="color:var(--${pnlSol == null ? "muted" : pnlSol >= 0 ? "up" : "down"})">${pnlSol != null ? curStr(pnlSol, "SOL", { signed: true, bare: true }) : "—"}</td>
         <td>${pnlPct != null ? `<span class="pill ${cls(pnlPct)}">${pct(pnlPct)}</span>` : "—"}</td>
         <td><a class="sol" href="https://solscan.io/tx/${encodeURIComponent(h.sig)}" target="_blank" rel="noopener">${h.sig ? h.sig.slice(0, 6) + "…" + h.sig.slice(-4) : "—"}</a></td>
       </tr>`;
@@ -1187,8 +1245,8 @@
     const f = unitFactor("SOL");
     S._closed = closed;
 
-    $("pnlHint").textContent = `실현 손익 (${S.currency}) · 마지막 점 = 미실현 포함`;
-    $("barHint").textContent = `청산 손익 (${S.currency})`;
+    $("pnlHint").textContent = `실현 손익 (${S.currency}) · 스왑 SOL 기준 · 마지막 점 = 미실현 포함`;
+    $("barHint").textContent = `청산 손익 (${S.currency}) · 스왑 SOL 기준`;
     $("allocHint").textContent = `${S.currency} 기준`;
 
     // 1) 누적 손익

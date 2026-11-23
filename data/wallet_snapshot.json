@@ -1,18 +1,33 @@
 {
-  "generated_at": 1795404978,
+  "generated_at": 1795412928,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
   "sol": 1.601516407,
-  "sol_usd": 71.55,
+  "sol_usd": 72.12,
   "tokens": [
     {
       "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
       "amount": 125.283441,
       "symbol": "JUP",
-      "usd_price": 0.23258958171829863,
-      "usd_value": 29.139623138419143,
-      "change24": 1062691
+      "usd_price": 0.2396,
+      "usd_value": 30.0179124636,
+      "change24": 10.4,
+      "rent_sol": 0.00148844
     }
   ],
-  "total_usd": 143.72812205926914,
+  "total_usd": 145.51927573644002,
+  "positions_meta": {
+    "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN": {
+      "symbol": "JUP",
+      "entry_sol": 0.397,
+      "entry_time": 1795344825.9251676,
+      "entry_price_sol": 0.0031688146241130146,
+      "sol_usd_entry": 70.6663,
+      "entry_price_usd": 0.22392846461716187,
+      "entry_usd": 28.0545,
+      "ata_rent_sol": 0.00148844,
+      "basis": "swap_pure_sol"
+    }
+  },
+  "accounting_basis": "swap_pure_sol",
   "errors": []
 }
