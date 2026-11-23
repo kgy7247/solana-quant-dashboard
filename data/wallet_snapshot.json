@@ -1,8 +1,8 @@
 {
-  "generated_at": 1795412928,
+  "generated_at": 1795413020,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
   "sol": 1.601516407,
-  "sol_usd": 72.12,
+  "sol_usd": 71.95,
   "tokens": [
     {
       "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
@@ -14,7 +14,7 @@
       "rent_sol": 0.00148844
     }
   ],
-  "total_usd": 145.51927573644002,
+  "total_usd": 145.24701794725001,
   "positions_meta": {
     "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN": {
       "symbol": "JUP",

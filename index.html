@@ -336,7 +336,7 @@
             <th>시각</th><th>토큰</th><th>구분</th>
             <th title="스왑에 실제로 넣은 SOL (ATA 렌트 예치금·tx 수수료 제외)">투입 SOL<br><span style="font-weight:500;color:var(--muted-2);text-transform:none;letter-spacing:0">(스왑)</span></th>
             <th title="스왑에서 받은 SOL (quote gross · tx 수수료 제외)">회수 SOL<br><span style="font-weight:500;color:var(--muted-2);text-transform:none;letter-spacing:0">(스왑)</span></th>
-            <th title="회수 SOL(스왑) − 투입 SOL(스왑). ATA 렌트·수수료는 제외">손익 (SOL)</th>
+            <th title="회수 SOL(스왑) − 투입 SOL(스왑). ATA 렌트·수수료 제외 · 표시는 항상 SOL">손익 (SOL)</th>
             <th>손익 %<br><span style="font-weight:500;color:var(--muted-2);text-transform:none;letter-spacing:0">(스왑 기준)</span></th>
             <th>트랜잭션</th>
           </tr>
@@ -787,8 +787,8 @@
 
     // ATA 렌트 예치금·tx 수수료: 손익과 섞지 않고 따로 보고
     let rentLockedSol = 0, rentReclaimedSol = 0, txFeeSol = 0;
-    for (const pos of Object.values(positions)) {
-      if (pos && isFinite(pos.ata_rent_sol)) rentLockedSol += Number(pos.ata_rent_sol);
+    for (const r of holdings()) {
+      if (r && isFinite(r.ataRentSol)) rentLockedSol += Number(r.ataRentSol);   // 지금 잠긴 예치금(온체인 실측 포함)
     }
     for (const h of (S.state?.history || [])) {
       if (!h) continue;
@@ -1214,7 +1214,7 @@
         <td>${tag}</td>
         <td class="mono">${h.sol != null ? fn(h.sol, 3) : (h.entry_sol != null ? fn(h.entry_sol, 3) : "—")}</td>
         <td class="mono">${h.out_sol != null ? fn(h.out_sol, 4) : "—"}</td>
-        <td class="mono" title="${esc(pnlTip)}" style="color:var(--${pnlSol == null ? "muted" : pnlSol >= 0 ? "up" : "down"})">${pnlSol != null ? curStr(pnlSol, "SOL", { signed: true, bare: true }) : "—"}</td>
+        <td class="mono" title="${esc(pnlTip)}" style="color:var(--${pnlSol == null ? "muted" : pnlSol >= 0 ? "up" : "down"})">${pnlSol != null ? (pnlSol > 0 ? "+" : "") + fn(pnlSol, 4) : "—"}</td>
         <td>${pnlPct != null ? `<span class="pill ${cls(pnlPct)}">${pct(pnlPct)}</span>` : "—"}</td>
         <td><a class="sol" href="https://solscan.io/tx/${encodeURIComponent(h.sig)}" target="_blank" rel="noopener">${h.sig ? h.sig.slice(0, 6) + "…" + h.sig.slice(-4) : "—"}</a></td>
       </tr>`;
