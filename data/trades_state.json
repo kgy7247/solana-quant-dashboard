@@ -1,5 +1,24 @@
 {
-  "positions": {},
+  "positions": {
+    "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": {
+      "symbol": "FLOAT",
+      "entry_sol": 0.4032,
+      "entry_time": 1795520992.5645454,
+      "buy_sig": "sJppcZW1A4A4Ga6PoqwbDRJjvV3wJggSHKoPHffUVSLBCrQMB4kkfbaPSTP7KSEaJ1eKvj9uj2qqJ5pHCat4Ror",
+      "atr_pct": 12.38,
+      "stop_loss_pct": -9.0,
+      "strategy_version": 8,
+      "actual_sol_spent": 0.40469344,
+      "ata_rent_sol": 0.00148844,
+      "tx_fee_sol": 5e-06,
+      "token_amount": 7917.470519,
+      "entry_tokens": 7917.470519,
+      "entry_price_sol": 5.0925355e-05,
+      "entry_price_usd": 0.003600931852,
+      "sol_price_entry": 70.71,
+      "pnl_basis": "swap_pure_sol"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -640,6 +659,26 @@
       "slippage_bps": 300,
       "verified": "on-chain meta.err=None, token_remaining=0",
       "attempts": []
+    },
+    {
+      "action": "BUY",
+      "symbol": "FLOAT",
+      "mint": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
+      "sol": 0.4032,
+      "entry_sol": 0.4032,
+      "sig": "sJppcZW1A4A4Ga6PoqwbDRJjvV3wJggSHKoPHffUVSLBCrQMB4kkfbaPSTP7KSEaJ1eKvj9uj2qqJ5pHCat4Ror",
+      "time": 1795520992.5645506,
+      "atr_pct": 12.38,
+      "stop_loss_pct": -9.0,
+      "actual_sol_spent": 0.40469344,
+      "ata_rent_sol": 0.00148844,
+      "tx_fee_sol": 5e-06,
+      "token_amount": 7917.470519,
+      "entry_tokens": 7917.470519,
+      "entry_price_sol": 5.0925355e-05,
+      "entry_price_usd": 0.003600931852,
+      "sol_price_entry": 70.71,
+      "pnl_basis": "swap_pure_sol"
     }
   ],
   "started_at": 1795093332.0777118,
