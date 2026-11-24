@@ -1,33 +1,11 @@
 {
-  "generated_at": 1795521019,
+  "generated_at": 1795547109,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
-  "sol": 1.611550539,
-  "sol_usd": 70.79,
-  "tokens": [
-    {
-      "mint": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
-      "amount": 7917.470519,
-      "symbol": "FLOAT",
-      "usd_price": 0.003933,
-      "usd_value": 31.139411551227,
-      "change24": 11,
-      "rent_sol": 0.00148844
-    }
-  ],
-  "total_usd": 145.22107420703702,
-  "positions_meta": {
-    "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": {
-      "symbol": "FLOAT",
-      "entry_sol": 0.4032,
-      "entry_time": 1795520992.5645454,
-      "entry_price_sol": 5.0925355e-05,
-      "sol_usd_entry": 70.71,
-      "entry_price_usd": 0.003600931852,
-      "entry_usd": 28.5103,
-      "ata_rent_sol": 0.00148844,
-      "basis": "swap_pure_sol"
-    }
-  },
+  "sol": 1.948114278,
+  "sol_usd": 69.15,
+  "tokens": [],
+  "total_usd": 134.7121023237,
+  "positions_meta": {},
   "accounting_basis": "swap_pure_sol",
   "errors": []
 }
