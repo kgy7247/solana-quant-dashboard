@@ -1254,7 +1254,7 @@
       const pnlTip = noteBits.length ? noteBits.join(" · ") : "";
       return `<tr>
         <td class="mono" style="color:var(--muted)">${fullTime(h.time)}</td>
-        <td><div class="tk"><div class="avatar">${esc((h.symbol || "?").slice(0, 2).toUpperCase())}</div>
+        <td><div class="tk"><div class="avatar">${esc((h.symbol || (isMigrate ? "USDC" : "?")).slice(0, 2).toUpperCase())}</div>
           <div><div class="nm">${esc(h.symbol || (isMigrate ? "USDC" : "?"))}</div><div class="mt">${esc(h.mint ? shortMint(h.mint) : "—")}</div></div></div></td>
         <td>${tag}</td>
         <td class="mono">${inUsd != null ? fn(inUsd, 3) : "—"}</td>

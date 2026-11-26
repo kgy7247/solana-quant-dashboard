@@ -16,7 +16,8 @@
       "entry_price_sol": 0.00012616604,
       "entry_price_usd": 0.008946433896,
       "sol_price_entry": 70.91,
-      "pnl_basis": "swap_pure_sol"
+      "pnl_basis": "swap_pure_sol",
+      "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM"
     }
   },
   "history": [
@@ -735,7 +736,8 @@
       "usdc_received": 106.566701,
       "sol_price_usd": 71.1161,
       "tx_fee_sol": 5.001e-06,
-      "rate_usdc_per_sol": 71.1156
+      "rate_usdc_per_sol": 71.1156,
+      "symbol": "USDC"
     },
     {
       "symbol": "JUP",
@@ -756,7 +758,9 @@
       "pnl_basis": "swap_pure_usdc",
       "note": "2026-11-26 USDC 전환 엔진 라운드트립 테스트 매수(장부 기록 버그 수리 후 온체인 사실로 복구)",
       "action": "BUY",
-      "repair": "saved_after_state_write_bug"
+      "repair": "saved_after_state_write_bug",
+      "time": 1795704688,
+      "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"
     },
     {
       "action": "SELL",
