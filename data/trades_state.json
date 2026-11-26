@@ -18,24 +18,6 @@
       "sol_price_entry": 70.91,
       "pnl_basis": "swap_pure_sol",
       "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM"
-    },
-    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
-      "symbol": "mihao",
-      "entry_usdc": 40.8668,
-      "usdc_spent": 40.8668,
-      "entry_time": 1795716850.7676897,
-      "buy_sig": "35ubsZ5xUycEL1iEg5DygXKnbHvn7Q76W6K2KBxoFtAB8SVnzBLA7hV5gjMePWVEEKoM79mFwjWGmNcrF4nc74Gs",
-      "atr_pct": 6.23,
-      "stop_loss_pct": -5.0,
-      "strategy_version": 9,
-      "ata_rent_sol": 0.0,
-      "tx_fee_sol": 0.000105,
-      "token_amount": 7036.957279,
-      "entry_tokens": 7036.957279,
-      "entry_price_usdc": 0.00580745319,
-      "sol_price_entry": 71.02,
-      "entry_sol_equiv": 0.575427,
-      "pnl_basis": "swap_pure_usdc"
     }
   },
   "history": [
@@ -917,6 +899,31 @@
       "action": "BUY",
       "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
       "time": 1795716850.7676897
+    },
+    {
+      "action": "SELL",
+      "symbol": "mihao",
+      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+      "entry_usdc": 40.8668,
+      "out_usdc": 42.404066,
+      "pnl_usdc": 1.537266,
+      "pnl_pct": 3.76,
+      "sol_price_exit": 71.2338,
+      "entry_sol_equiv": 0.575427,
+      "out_sol_equiv": 0.59528,
+      "ata_rent_sol": 0.0,
+      "tx_fee_sol": 0.000102808,
+      "pnl_basis": "swap_pure_usdc",
+      "legacy_sol_entry": false,
+      "sig": "2rJ4vgEXaqBBEgrmFhWChfNRiKpNH71BrH8EJE9bmCUxneTDH468MBL2yYhevcnpUXdmobLxEtQNCcF1Nziu6Tc4",
+      "time": 1795719219.4566836,
+      "token_amount": 7036.957279,
+      "token_remaining_raw": 0,
+      "slot": 474255577,
+      "block_time": 1795719214,
+      "slippage_bps": 150,
+      "verified": "meta.err=None, token_remaining=0",
+      "retry_attempts": []
     }
   ],
   "started_at": 1795093332.0777118,
