@@ -1,9 +1,9 @@
 {
-  "generated_at": 1795719247,
+  "generated_at": 1795727056,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
   "base_currency": "USDC",
   "sol": 0.065557641,
-  "sol_usd": 71.19,
+  "sol_usd": 71.35,
   "usdc": 109.86056,
   "tokens": [
     {
@@ -19,13 +19,13 @@
       "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
       "amount": 3087.994207,
       "symbol": "CLAUDIA",
-      "usd_price": 0.009240784016881425,
-      "usd_value": 28.535487512268034,
-      "change24": 8.87,
+      "usd_price": 0.009222499593347495,
+      "usd_value": 28.47902531831692,
+      "change24": 11.03,
       "rent_sol": 0.00151384
     }
   ],
-  "total_usd": 143.06309597505805,
+  "total_usd": 143.01712300366694,
   "positions_meta": {
     "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM": {
       "symbol": "CLAUDIA",
@@ -42,14 +42,6 @@
     }
   },
   "sol_history": [
-    [
-      1794510000000,
-      81.52268286792011
-    ],
-    [
-      1794513600000,
-      81.56682629912649
-    ],
     [
       1794517200000,
       81.28611233769962
@@ -1387,8 +1379,16 @@
       71.01223670773578
     ],
     [
-      1795719150000,
-      71.2052347986481
+      1795719600000,
+      71.2411325718861
+    ],
+    [
+      1795723200000,
+      71.23251100366787
+    ],
+    [
+      1795726980000,
+      71.34192041153324
     ]
   ],
   "accounting_basis": "swap_pure_usdc",
