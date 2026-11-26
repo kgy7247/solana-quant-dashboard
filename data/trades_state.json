@@ -1,5 +1,24 @@
 {
-  "positions": {},
+  "positions": {
+    "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM": {
+      "symbol": "CLAUDIA",
+      "entry_sol": 0.3896,
+      "entry_time": 1795678145.5450475,
+      "buy_sig": "3PiyP2aaN5rE1wfA3wWgvzvv8KMKdM4Z9NBj4CZjYHetjHbv9LchApEfHYJNL6Shyxv8tS1QcA2J7FaCKEWxX8ec",
+      "atr_pct": 5.56,
+      "stop_loss_pct": -6.67,
+      "strategy_version": 8,
+      "actual_sol_spent": 0.389615091,
+      "ata_rent_sol": 0.0,
+      "tx_fee_sol": 1.5091e-05,
+      "token_amount": 3087.994207,
+      "entry_tokens": 3087.994207,
+      "entry_price_sol": 0.00012616604,
+      "entry_price_usd": 0.008946433896,
+      "sol_price_entry": 70.91,
+      "pnl_basis": "swap_pure_sol"
+    }
+  },
   "history": [
     {
       "action": "BUY",
@@ -684,6 +703,26 @@
       "slippage_bps": 150,
       "verified": "meta.err=None, token_remaining=0",
       "retry_attempts": []
+    },
+    {
+      "action": "BUY",
+      "symbol": "CLAUDIA",
+      "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
+      "sol": 0.3896,
+      "entry_sol": 0.3896,
+      "sig": "3PiyP2aaN5rE1wfA3wWgvzvv8KMKdM4Z9NBj4CZjYHetjHbv9LchApEfHYJNL6Shyxv8tS1QcA2J7FaCKEWxX8ec",
+      "time": 1795678145.5450528,
+      "atr_pct": 5.56,
+      "stop_loss_pct": -6.67,
+      "actual_sol_spent": 0.389615091,
+      "ata_rent_sol": 0.0,
+      "tx_fee_sol": 1.5091e-05,
+      "token_amount": 3087.994207,
+      "entry_tokens": 3087.994207,
+      "entry_price_sol": 0.00012616604,
+      "entry_price_usd": 0.008946433896,
+      "sol_price_entry": 70.91,
+      "pnl_basis": "swap_pure_sol"
     }
   ],
   "started_at": 1795093332.0777118,
