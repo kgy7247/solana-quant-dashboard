@@ -1,9 +1,9 @@
 {
-  "generated_at": 1795709443,
+  "generated_at": 1795709646,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
   "base_currency": "USDC",
   "sol": 0.065936648,
-  "sol_usd": 70.99,
+  "sol_usd": 70.95,
   "usdc": 66.464412,
   "tokens": [
     {
@@ -19,8 +19,8 @@
       "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
       "amount": 3087.994207,
       "symbol": "CLAUDIA",
-      "usd_price": 0.008743229183492355,
-      "usd_value": 26.999041069097732,
+      "usd_price": 0.008719635122435438,
+      "usd_value": 26.92618274523437,
       "change24": 6.69,
       "rent_sol": 0.00151384
     },
@@ -28,13 +28,13 @@
       "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
       "amount": 7732.317392,
       "symbol": "mihao",
-      "usd_price": 0.005193,
-      "usd_value": 40.153924216655994,
-      "change24": 13.91,
+      "usd_price": 0.005449,
+      "usd_value": 42.133397469007996,
+      "change24": 20.26,
       "rent_sol": 0.00151384
     }
   ],
-  "total_usd": 138.29821992727372,
+  "total_usd": 140.20219738984235,
   "positions_meta": {
     "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM": {
       "symbol": "CLAUDIA",
@@ -1409,8 +1409,8 @@
       71.02306112159849
     ],
     [
-      1795709370000,
-      70.97730001314952
+      1795709560000,
+      71.02871189401266
     ]
   ],
   "accounting_basis": "swap_pure_usdc",
