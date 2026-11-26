@@ -1,17 +1,17 @@
 {
-  "generated_at": 1795711529,
+  "generated_at": 1795712302,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
   "base_currency": "USDC",
-  "sol": 0.065870449,
-  "sol_usd": 70.99,
-  "usdc": 67.323394,
+  "sol": 0.065765449,
+  "sol_usd": 70.86,
+  "usdc": 108.323294,
   "tokens": [
     {
       "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-      "amount": 67.323394,
+      "amount": 108.323294,
       "symbol": "USDC",
       "usd_price": 1.0,
-      "usd_value": 67.323394,
+      "usd_value": 108.323294,
       "change24": 0.0,
       "rent_sol": 0.00148844
     },
@@ -23,18 +23,9 @@
       "usd_value": 25.787839622657003,
       "change24": null,
       "rent_sol": 0.00151384
-    },
-    {
-      "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
-      "amount": 7483.128795,
-      "symbol": "mihao",
-      "usd_price": 0.005315,
-      "usd_value": 39.772829545425,
-      "change24": 14.78,
-      "rent_sol": 0.00151384
     }
   ],
-  "total_usd": 137.56020634259198,
+  "total_usd": 138.77127333879702,
   "positions_meta": {
     "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM": {
       "symbol": "CLAUDIA",
@@ -46,19 +37,6 @@
       "sol_usd_entry": 70.91,
       "entry_price_usd": 0.008946433896,
       "entry_usd": 27.6265,
-      "ata_rent_sol": 0.0,
-      "basis": "swap_pure_usdc"
-    },
-    "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
-      "symbol": "mihao",
-      "entry_usdc": 40.2259,
-      "entry_sol": null,
-      "entry_time": 1795711454.978522,
-      "entry_price_sol": null,
-      "entry_price_usdc": 0.005375545591,
-      "sol_usd_entry": 70.94,
-      "entry_price_usd": null,
-      "entry_usd": 40.2259,
       "ata_rent_sol": 0.0,
       "basis": "swap_pure_usdc"
     }
@@ -1409,8 +1387,8 @@
       70.98639608116275
     ],
     [
-      1795711440000,
-      70.90425749119234
+      1795712220000,
+      70.87927609280611
     ]
   ],
   "accounting_basis": "swap_pure_usdc",
