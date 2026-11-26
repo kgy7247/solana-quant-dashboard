@@ -1240,7 +1240,7 @@
         : isCore
         ? `<span class="tag core">${h.action}</span>`
         : `<span class="tag ${isSell ? "sell" : "buy"}">${h.action}</span>`;
-      const rec = closedBySig[h.sig] || null;
+      const rec = closedBySig[h.sig || h.buy_sig] || null;
       const pnlUsd = h.pnl_usdc ?? (h.pnl_sol != null ? h.pnl_sol * (solUsdAt(h.time) || 1) : (rec ? rec.pnlUsd : null));
       const pnlPct = h.pnl_pct ?? (rec ? rec.pnlPct : null);
       const inUsd = h.entry_usdc ?? (h.entry_sol != null ? h.entry_sol * (solUsdAt(h.time) || 1) : (h.sol != null ? h.sol * (solUsdAt(h.time) || 1) : null));
@@ -1261,7 +1261,7 @@
         <td class="mono">${outUsd != null ? fn(outUsd, 3) : "—"}</td>
         <td class="mono" title="${esc(pnlTip)}" style="color:var(--${pnlUsd == null ? "muted" : pnlUsd >= 0 ? "up" : "down"})">${pnlUsd != null ? (pnlUsd > 0 ? "+" : "") + fn(pnlUsd, 3) : "—"}</td>
         <td>${pnlPct != null ? `<span class="pill ${cls(pnlPct)}">${pct(pnlPct)}</span>` : "—"}</td>
-        <td><a class="sol" href="https://solscan.io/tx/${encodeURIComponent(h.sig)}" target="_blank" rel="noopener">${h.sig ? h.sig.slice(0, 6) + "…" + h.sig.slice(-4) : "—"}</a></td>
+        <td><a class="sol" href="https://solscan.io/tx/${encodeURIComponent(h.sig || h.buy_sig || "")}" target="_blank" rel="noopener">${(h.sig || h.buy_sig) ? (h.sig || h.buy_sig).slice(0, 6) + "…" + (h.sig || h.buy_sig).slice(-4) : "—"}</a></td>
       </tr>`;
     }).join("");
   }
