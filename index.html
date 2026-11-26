@@ -1163,8 +1163,8 @@
       item("목표 수익", c.target_pct != null ? "+" + fn(c.target_pct, 1) + "%" : "—"),
       item("트레일링", c.trailing_activate_pct != null ? `+${fn(c.trailing_activate_pct, 1)}% → -${fn(c.trailing_drop_pct, 1)}%` : "—"),
       item("ATR 진입", c.min_atr_pct != null ? "≥" + fn(c.min_atr_pct, 1) + "%" : "—"),
-      item("동적 손절", (c.atr_stop_max_pct != null && c.atr_stop_min_pct != null) ? `${fn(c.atr_stop_max_pct, 1)} ~ ${fn(c.atr_stop_min_pct, 1)}% (×${fn(c.atr_stop_mult, 1)}ATR)` : "—"),
-      item("손절(폴백)", c.stop_loss_pct != null ? fn(c.stop_loss_pct, 1) + "%" : "—"),
+      item("동적 손절", c.atr_stop_enabled === false ? "비활성" : ((c.atr_stop_max_pct != null && c.atr_stop_min_pct != null) ? `${fn(c.atr_stop_max_pct, 1)} ~ ${fn(c.atr_stop_min_pct, 1)}% (×${fn(c.atr_stop_mult, 1)}ATR)` : "—")),
+      item(c.atr_stop_enabled === false ? "손절(고정)" : "손절(폴백)", c.stop_loss_pct != null ? fn(c.stop_loss_pct, 1) + "%" : "—"),
       item("SOL 급락 컷", c.sol_crash_h1_pct != null ? fn(c.sol_crash_h1_pct, 1) + "%/1h" : "—"),
       item("가스 예비", c.sol_gas_reserve != null ? fn(c.sol_gas_reserve, 2) + " SOL" : "—")
     ].join("");
