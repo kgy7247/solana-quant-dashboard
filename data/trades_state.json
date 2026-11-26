@@ -723,6 +723,65 @@
       "entry_price_usd": 0.008946433896,
       "sol_price_entry": 70.91,
       "pnl_basis": "swap_pure_sol"
+    },
+    {
+      "action": "MIGRATE_USDC",
+      "reason": "건엽님 승인: 메인 기준통화 SOL→USDC 전환(가스비 0.06 SOL 유지)",
+      "sig": "3WbE4uS8Bux1ubtHTNg7DP6e315QHzCZyFtnpAVn9qPvdaAZUBn93eVgttf8Qov9fm5Xbdc6BxxoKDXzwsSdtVM",
+      "time": 1795704449.703123,
+      "swap_sol": 1.498499,
+      "sol_before": 1.558499188,
+      "sol_after": 0.058506747,
+      "usdc_received": 106.566701,
+      "sol_price_usd": 71.1161,
+      "tx_fee_sol": 5.001e-06,
+      "rate_usdc_per_sol": 71.1156
+    },
+    {
+      "symbol": "JUP",
+      "entry_usdc": 4.0,
+      "usdc_spent": 4.0,
+      "entry_time": 1795704688,
+      "buy_sig": "53jb9yhY86wZAS3G1SQCjy1LtHWXBr1VeLPz6TVDcSSPFCjKXUxBgqaBPyzFZtnwpfwtwGQrAsdEcZcW8mUQ3nGt",
+      "atr_pct": 6.0,
+      "stop_loss_pct": -7.2,
+      "strategy_version": 8,
+      "ata_rent_sol": 0.0,
+      "tx_fee_sol": 8.573e-06,
+      "token_amount": 17.093358,
+      "entry_tokens": 17.093358,
+      "entry_price_usdc": 0.234009022686,
+      "sol_price_entry": 71.02,
+      "entry_sol_equiv": 0.056322,
+      "pnl_basis": "swap_pure_usdc",
+      "note": "2026-11-26 USDC 전환 엔진 라운드트립 테스트 매수(장부 기록 버그 수리 후 온체인 사실로 복구)",
+      "action": "BUY",
+      "repair": "saved_after_state_write_bug"
+    },
+    {
+      "action": "SELL",
+      "symbol": "JUP",
+      "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "entry_usdc": 4.0,
+      "out_usdc": 3.994011,
+      "pnl_usdc": -0.005989,
+      "pnl_pct": -0.15,
+      "sol_price_exit": 71.0252,
+      "entry_sol_equiv": 0.056322,
+      "out_sol_equiv": 0.056234,
+      "ata_rent_sol": 0.0,
+      "tx_fee_sol": 7.969e-06,
+      "pnl_basis": "swap_pure_usdc",
+      "legacy_sol_entry": false,
+      "sig": "5XYCdgDQLwMhYY6tjGYC33MUKr9TSkRaurTWBx6CdWDh5bqmYo76Y2qLntyLHKxnXvP3mJKDBXCyavm7se8T1Mm5",
+      "time": 1795704721.1591475,
+      "token_amount": 17.093358,
+      "token_remaining_raw": 0,
+      "slot": 474188286,
+      "block_time": 1795704716,
+      "slippage_bps": 150,
+      "verified": "meta.err=None, token_remaining=0",
+      "retry_attempts": []
     }
   ],
   "started_at": 1795093332.0777118,
@@ -739,7 +798,9 @@
       "at": "2026-11-23T00:51:59Z",
       "sig": "2vS9FwxcpMBTdE7MNxtJJ7avESaoNXzgpA22Mo4skoDHuXuDAbA9yQk7krG22GFgE9wKdBxT8sa48rBRQeYS4Had",
       "reason": "trailing_stop_peak_6.72pct"
-    }
+    },
+    "base_currency": "USDC",
+    "base_currency_changed_at": 1795704449.7031317
   },
   "total_realized_pnl_sol": 0.077048733
 }
