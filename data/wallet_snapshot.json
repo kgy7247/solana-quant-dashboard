@@ -1,63 +1,24 @@
 {
-  "generated_at": 1795770289,
+  "generated_at": 1795782246,
   "wallet": "CBg7bCawmBztNwC3wEf8HoxABzFqVzJ5wSvBwHhnWG5L",
   "base_currency": "USDC",
-  "sol": 0.065557641,
-  "sol_usd": 73.48,
-  "usdc": 109.86056,
+  "sol": 0.065528314,
+  "sol_usd": 73.023,
+  "usdc": 135.433195,
   "tokens": [
     {
       "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-      "amount": 109.86056,
+      "amount": 135.433195,
       "symbol": "USDC",
       "usd_price": 1.0,
-      "usd_value": 109.86056,
+      "usd_value": 135.433195,
       "change24": 0.0,
       "rent_sol": 0.00148844
-    },
-    {
-      "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
-      "amount": 3087.994207,
-      "symbol": "CLAUDIA",
-      "usd_price": 0.009104067581986296,
-      "usd_value": 28.113307953310184,
-      "change24": -1.47,
-      "rent_sol": 0.00151384
     }
   ],
-  "total_usd": 142.7910434139902,
-  "positions_meta": {
-    "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM": {
-      "symbol": "CLAUDIA",
-      "entry_usdc": 27.626536,
-      "entry_sol": 0.3896,
-      "entry_time": 1795678145.5450475,
-      "entry_price_sol": 0.00012616604,
-      "entry_price_usdc": null,
-      "sol_usd_entry": 70.91,
-      "entry_price_usd": 0.008946433896,
-      "entry_usd": 27.6265,
-      "ata_rent_sol": 0.0,
-      "basis": "swap_pure_usdc"
-    }
-  },
+  "total_usd": 140.21826907322202,
+  "positions_meta": {},
   "sol_history": [
-    [
-      1794560400000,
-      79.71324472533782
-    ],
-    [
-      1794564000000,
-      79.97229885088323
-    ],
-    [
-      1794567600000,
-      80.41813253032004
-    ],
-    [
-      1794571200000,
-      80.61734249335427
-    ],
     [
       1794574800000,
       80.62405163188633
@@ -1387,8 +1348,24 @@
       73.2608800387268
     ],
     [
-      1795770220000,
-      73.45033243975593
+      1795770000000,
+      73.29449429152818
+    ],
+    [
+      1795773600000,
+      73.52793704306264
+    ],
+    [
+      1795777200000,
+      73.30931748617054
+    ],
+    [
+      1795780800000,
+      73.08742948353787
+    ],
+    [
+      1795782180000,
+      73.08183327557391
     ]
   ],
   "accounting_basis": "swap_pure_usdc",
